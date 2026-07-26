@@ -30,7 +30,7 @@ mlflow.db
 mlflow_start.sh
 
 # Sphinx / docs build output
-docs/_build/
+**/docs/_build/
 
 # Secrets / local config
 .env
@@ -50,5 +50,4 @@ htmlcov/
 Thumbs.db
 
 # Excluded file
-bin/
-
+notes/
