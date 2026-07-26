@@ -14,8 +14,6 @@ help:
 	@echo "  make pipeline-recommendations - importa le raccomandazioni in Neo4j"
 	@echo "  make start-neo4j              - avvia Neo4j in Docker"
 	@echo "  make stop-neo4j               - arresta Neo4j in Docker"
-	@echo "  make start-arcadedb           - avvia ArcadeDB per Graph RAG"
-	@echo "  make stop-arcadedb            - arresta ArcadeDB"
 	@echo "  make full-docs                - avvia la documentazione del GNN"
 	@echo "  make local-mlflow-up          - avvia MLflow locale"
 
@@ -42,12 +40,6 @@ start-neo4j:
 
 stop-neo4j:
 	docker compose down
-
-start-arcadedb:
-	docker compose -f graph-rag-agent/docker-compose-arcadedb.yaml up -d
-
-stop-arcadedb:
-	docker compose -f graph-rag-agent/docker-compose-arcadedb.yaml down
 
 full-docs:
 	$(MAKE) -C graph-neural-network/docs live
