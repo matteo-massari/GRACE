@@ -1,0 +1,54 @@
+# Python-generated files
+__pycache__/
+*.py[cod]
+*$py.class
+build/
+dist/
+wheels/
+*.egg-info/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Editors / IDE
+.vscode/
+.idea/
+
+# Jupyter / Marimo / notebook state
+__marimo__/
+.ipynb_checkpoints/
+
+# Experiments
+notebook/
+
+# ML / tracking
+mlruns/
+mlflow.db
+mlflow_start.sh
+
+# Sphinx / docs build output
+docs/_build/
+
+# Secrets / local config
+.env
+.env.*
+*.local
+
+# Test / coverage / cache
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Excluded file
+bin/
+

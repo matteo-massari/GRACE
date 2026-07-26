@@ -1,0 +1,24 @@
+services:
+  ArcadeDB:
+    image: arcadedata/arcadedb:26.7.3
+    container_name: arcadedb_graphrag
+    ports:
+      - "2480:2480"
+      - "2424:2424"
+      - "4536:6379"
+      - "5432:5432"
+      - "8182:8182"
+    environment:
+      JAVA_OPTS: >
+        -Darcadedb.server.rootPassword=Password10
+        -Darcadedb.dumpConfigAtStartup=true
+        -Darcadedb.server.defaultDatabases=Imported[root]{import:https://github.com/ArcadeData/arcadedb-datasets/raw/main/orientdb/OpenBeer.gz}
+        -Darcadedb.server.plugins=Redis:com.arcadedb.redis.RedisProtocolPlugin,
+                                  MongoDB:com.arcadedb.mongo.MongoDBProtocolPlugin,
+                                  Postgres:com.arcadedb.postgres.PostgresProtocolPlugin,
+                                  GremlinServer:com.arcadedb.server.gremlin.GremlinServerPlugin
+    volumes:
+      - arcadedb_vol:/home/arcadedb/databases
+
+volumes:
+  arcadedb_vol:

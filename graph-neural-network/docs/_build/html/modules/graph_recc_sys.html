@@ -1,0 +1,1577 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>graph_recc_sys package &mdash; Graph Recommendation System</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Graph Recommendation System
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">Teoria generale</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#introduction-to-knowledge-graphs">Introduction to Knowledge Graphs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#types-of-knowledge-graphs">Types of Knowledge Graphs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#directed-edge-labelled-graph">Directed Edge-Labelled Graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#property-graph">Property Graph</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#knowledge-representation-and-reasoning">Knowledge Representation and Reasoning</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#knowledge-representation">Knowledge Representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#knowledge-reasoning">Knowledge Reasoning</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#knowledge-graph-embedding">Knowledge Graph Embedding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#graph-neural-networks">Graph Neural Networks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#architecture">Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#prediction-tasks-for-gnns">Prediction Tasks for GNNs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#graph-neural-networks-vs-knowledge-graph-embeddings">Graph Neural Networks vs Knowledge Graph Embeddings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#enrichment-of-a-graph-database">Enrichment of a Graph Database</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#enrichment-from-text">Enrichment from Text</a></li>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#enrichment-from-structured-data">Enrichment from Structured Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#enterprise-knowledge-graph">Enterprise Knowledge Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#agentic-ai-and-graph-databases">Agentic AI and Graph Databases</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#graph-retrieval-augmented-generation">Graph Retrieval-Augmented Generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#graphrag-architecture">GraphRAG Architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#graph-learning-recommendation-systems">Graph Learning Recommendation Systems</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#id1">Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#information-propagation">Information Propagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#output">Output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#approaches-to-graph-learning-recommendation-systems">Approaches to Graph Learning Recommendation Systems</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#random-walk-approaches">Random Walk Approaches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#graph-embedding-based-recommendation-systems">Graph Embedding-Based Recommendation Systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#graph-neural-network-based-recommendation-systems">Graph Neural Network-Based Recommendation Systems</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="project.html">Progetto</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="project/graph_doc.html">Knowledge Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="project/rete.html">Architettura della rete</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="project/rete.html#panoramica">Panoramica</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/rete.html#obiettivo">Obiettivo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/rete.html#architettura-del-modello">Architettura del modello</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/rete.html#rappresentazioni-iniziali-dei-nodi">Rappresentazioni iniziali dei nodi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/rete.html#convoluzione-eterogenea">Convoluzione eterogenea</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/rete.html#layer-di-proiezione">Layer di proiezione</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/rete.html#decoder">Decoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/rete.html#loss-supportate">Loss supportate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/rete.html#integrazione-nella-pipeline">Integrazione nella pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/rete.html#parametri-principali">Parametri principali</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/rete.html#quando-usare-questa-rete">Quando usare questa rete</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="project/agent_doc.html">Sales Agent</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#preparare-lambiente">1. Preparare l’ambiente</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#configurare-le-variabili-dambiente">2. Configurare le variabili d’ambiente</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="getting_started.html#note-sulle-variabili-mlflow">Note sulle variabili MLflow</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#configurare-interface-yaml">3. Configurare <code class="docutils literal notranslate"><span class="pre">interface.yaml</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#avviare-mlflow-in-locale">4. Avviare MLflow in locale</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#preparare-i-dati">5. Preparare i dati</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#eseguire-il-training">6. Eseguire il training</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#eseguire-la-pipeline-senza-mlflow">7. Eseguire la pipeline senza MLflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#eseguire-inferenza-da-modello-gia-salvato">8. Eseguire inferenza da modello già salvato</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#come-capire-se-la-rete-e-partita-correttamente">9. Come capire se la rete è partita correttamente</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#output-attesi">10. Output attesi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="getting_started.html#mlflow-non-parte">MLflow non parte</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting_started.html#il-training-fallisce-allavvio">Il training fallisce all’avvio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting_started.html#nessun-dato-disponibile">Nessun dato disponibile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting_started.html#linferenza-da-mlflow-non-trova-il-modello">L’inferenza da MLflow non trova il modello</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#esempio-di-flusso-minimo">Esempio di flusso minimo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#prossimi-passi">Prossimi passi</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="experiments.html">Esperimenti</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="experiments/model_history.html">Storico del Modello</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experiments/agent_history.html">Storico dell'agente</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="code.html">Architettura del codice</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="code/engine.html">engine</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="code/engine_mod/evaluation.html">Evaluation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="code/engine_mod/inference.html">Inference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="code/engine_mod/training.html">Training</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="code/extraction.html">extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code/graph_dataset.html">graph_dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code/graph_loader.html">graph_loader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code/neural_network.html">neural_network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code/query.html">query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code.html#componenti-principali">Componenti principali</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code.html#flusso-generale">Flusso generale</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Graph Recommendation System</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">graph_recc_sys package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/modules/graph_recc_sys.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="graph-recc-sys-package">
+<h1>graph_recc_sys package<a class="headerlink" href="#graph-recc-sys-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-graph_recc_sys.engine">
+<span id="graph-recc-sys-engine-module"></span><h2>graph_recc_sys.engine module<a class="headerlink" href="#module-graph_recc_sys.engine" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="graph_recc_sys.engine.NeuralNetworkEngine">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">graph_recc_sys.engine.</span></span><span class="sig-name descname"><span class="pre">NeuralNetworkEngine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loader</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#graph_recc_sys.graph_loader.GraphLoader" title="graph_recc_sys.graph_loader.GraphLoader"><span class="pre">GraphLoader</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">hyperparams</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">HyperParams</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/graph_recc_sys/engine.html#NeuralNetworkEngine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graph_recc_sys.engine.NeuralNetworkEngine" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Coordinate training, validation, test-time evaluation, inference, and
+prediction post-processing for a graph-based neural recommendation engine.</p>
+<p>This class acts as the high-level orchestration component of the
+recommendation pipeline. It receives subgraphs, loaders, and label indices
+from a <cite>GraphLoader</cite> instance and delegates the actual operations to
+specialized training, inference, and evaluation components.</p>
+<p>The engine supports multiple training modes, handles optimization utilities
+such as optimizer, learning-rate scheduler, and warmup, logs experiments
+and checkpoints through MLflow, and provides utility methods to decode and
+export generated recommendations.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.engine.NeuralNetworkEngine.train_subgraph">
+<span class="sig-name descname"><span class="pre">train_subgraph</span></span><a class="headerlink" href="#graph_recc_sys.engine.NeuralNetworkEngine.train_subgraph" title="Link to this definition"></a></dt>
+<dd><p>Training subgraph used during model optimization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HeteroData | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.engine.NeuralNetworkEngine.train_loader">
+<span class="sig-name descname"><span class="pre">train_loader</span></span><a class="headerlink" href="#graph_recc_sys.engine.NeuralNetworkEngine.train_loader" title="Link to this definition"></a></dt>
+<dd><p>Mini-batch loader used during training.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.engine.NeuralNetworkEngine.train_edge_label_index">
+<span class="sig-name descname"><span class="pre">train_edge_label_index</span></span><a class="headerlink" href="#graph_recc_sys.engine.NeuralNetworkEngine.train_edge_label_index" title="Link to this definition"></a></dt>
+<dd><p>Training edge labels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>EdgeIndex | torch.Tensor | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.engine.NeuralNetworkEngine.val_loader">
+<span class="sig-name descname"><span class="pre">val_loader</span></span><a class="headerlink" href="#graph_recc_sys.engine.NeuralNetworkEngine.val_loader" title="Link to this definition"></a></dt>
+<dd><p>Mini-batch loader used during validation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.engine.NeuralNetworkEngine.val_subgraph">
+<span class="sig-name descname"><span class="pre">val_subgraph</span></span><a class="headerlink" href="#graph_recc_sys.engine.NeuralNetworkEngine.val_subgraph" title="Link to this definition"></a></dt>
+<dd><p>Validation subgraph used for inference and evaluation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HeteroData | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.engine.NeuralNetworkEngine.val_edge_label_index">
+<span class="sig-name descname"><span class="pre">val_edge_label_index</span></span><a class="headerlink" href="#graph_recc_sys.engine.NeuralNetworkEngine.val_edge_label_index" title="Link to this definition"></a></dt>
+<dd><p>Validation ground-truth edges used for metric computation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>EdgeIndex | torch.Tensor | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.engine.NeuralNetworkEngine.val_exclude_links">
+<span class="sig-name descname"><span class="pre">val_exclude_links</span></span><a class="headerlink" href="#graph_recc_sys.engine.NeuralNetworkEngine.val_exclude_links" title="Link to this definition"></a></dt>
+<dd><p>Edges to exclude when generating validation recommendations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>EdgeIndex | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.engine.NeuralNetworkEngine.test_subgraph">
+<span class="sig-name descname"><span class="pre">test_subgraph</span></span><a class="headerlink" href="#graph_recc_sys.engine.NeuralNetworkEngine.test_subgraph" title="Link to this definition"></a></dt>
+<dd><p>Test subgraph used for final inference and evaluation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HeteroData | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.engine.NeuralNetworkEngine.test_edge_label_index">
+<span class="sig-name descname"><span class="pre">test_edge_label_index</span></span><a class="headerlink" href="#graph_recc_sys.engine.NeuralNetworkEngine.test_edge_label_index" title="Link to this definition"></a></dt>
+<dd><p>Test ground-truth edges used for final metric computation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>EdgeIndex | torch.Tensor | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.engine.NeuralNetworkEngine.test_exclude_links">
+<span class="sig-name descname"><span class="pre">test_exclude_links</span></span><a class="headerlink" href="#graph_recc_sys.engine.NeuralNetworkEngine.test_exclude_links" title="Link to this definition"></a></dt>
+<dd><p>Edges to exclude when generating test recommendations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>EdgeIndex | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.engine.NeuralNetworkEngine.params">
+<span class="sig-name descname"><span class="pre">params</span></span><a class="headerlink" href="#graph_recc_sys.engine.NeuralNetworkEngine.params" title="Link to this definition"></a></dt>
+<dd><p>Hyperparameter object controlling model training and inference.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HyperParams</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.engine.NeuralNetworkEngine.trainer">
+<span class="sig-name descname"><span class="pre">trainer</span></span><a class="headerlink" href="#graph_recc_sys.engine.NeuralNetworkEngine.trainer" title="Link to this definition"></a></dt>
+<dd><p>Training helper instance, initialized during training.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Training | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.engine.NeuralNetworkEngine.inference">
+<span class="sig-name descname"><span class="pre">inference</span></span><a class="headerlink" href="#graph_recc_sys.engine.NeuralNetworkEngine.inference" title="Link to this definition"></a></dt>
+<dd><p>Inference helper instance used to generate recommendations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Inference | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.engine.NeuralNetworkEngine.evaluator">
+<span class="sig-name descname"><span class="pre">evaluator</span></span><a class="headerlink" href="#graph_recc_sys.engine.NeuralNetworkEngine.evaluator" title="Link to this definition"></a></dt>
+<dd><p>Evaluation helper instance used to compute ranking metrics.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Evaluation | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="graph_recc_sys.engine.NeuralNetworkEngine.training">
+<span class="sig-name descname"><span class="pre">training</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Module</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">device</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/graph_recc_sys/engine.html#NeuralNetworkEngine.training"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graph_recc_sys.engine.NeuralNetworkEngine.training" title="Link to this definition"></a></dt>
+<dd><p>Train the model, run validation at each epoch, and log metrics and
+checkpoints to MLflow.</p>
+<p>Depending on the configured loss function, the engine automatically
+switches between:
+- <cite>triplet</cite> mode for metric-learning / contrastive losses
+- <cite>binary</cite> mode for edge classification losses</p>
+<p>Supported loss functions:
+- <cite>TripletMarginLoss</cite>
+- <cite>BPRLoss</cite>
+- <cite>InfoNCE</cite>
+- <cite>MultiLoss</cite>
+- <cite>BCEWithLogitsLoss</cite>
+- <cite>FocalLoss</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></span>) – PyTorch model to train.</p></li>
+<li><p><strong>dry_run</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – If True, no artifacts or metrics are logged to MLflow.</p></li>
+<li><p><strong>device</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">device</span></code></span>) – PyTorch device used for training and validation.</p></li>
+<li><p><strong>run_name</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – Name of the MLflow run.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – If <cite>self.params.loss_function</cite> is invalid.</p></li>
+<li><p><strong>ValueError</strong> – If <cite>self.params.mode</cite> becomes invalid during training.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="graph_recc_sys.engine.NeuralNetworkEngine.run_inference">
+<span class="sig-name descname"><span class="pre">run_inference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Module</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subgraph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">HeteroData</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_label_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">EdgeIndex</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_links</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">EdgeIndex</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">device</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">popularity_subgraph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">HeteroData</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/graph_recc_sys/engine.html#NeuralNetworkEngine.run_inference"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graph_recc_sys.engine.NeuralNetworkEngine.run_inference" title="Link to this definition"></a></dt>
+<dd><p>Run inference on a given subgraph and return prediction metrics.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></span>) – Trained PyTorch model.</p></li>
+<li><p><strong>subgraph</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">HeteroData</span></code></span>) – Graph on which inference is performed.</p></li>
+<li><p><strong>edge_label_index</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">EdgeIndex</span></code></span>) – Ground-truth edges used for evaluation.</p></li>
+<li><p><strong>exclude_links</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">EdgeIndex</span></code></span>) – Edges to exclude from prediction candidates
+(for example training edges).</p></li>
+<li><p><strong>device</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">device</span></code></span>) – PyTorch device used for inference.</p></li>
+<li><p><strong>k</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – Number of top-k recommendations.</p></li>
+<li><p><strong>popularity_subgraph</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">HeteroData</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Graph used to compute popularity-based metrics.
+If None, <cite>self.train_subgraph</cite> is used.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary containing the computed evaluation metrics.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>]</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="graph_recc_sys.engine.NeuralNetworkEngine.give_prediction">
+<span class="sig-name descname"><span class="pre">give_prediction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pred_index_mat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item_inv_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_inv_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">product_names_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_idx_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_label_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">EdgeIndex</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pretty_print</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dump</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/graph_recc_sys/engine.html#NeuralNetworkEngine.give_prediction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graph_recc_sys.engine.NeuralNetworkEngine.give_prediction" title="Link to this definition"></a></dt>
+<dd><p>Decode model predictions into original customer/product identifiers and,
+if provided, attach the products actually purchased in the ground truth.</p>
+<p>If <cite>dump=True</cite>, the method also exports the recommendations to a CSV file.</p>
+<dl>
+<dt>Output structure:</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>customer_id: {</dt><dd><dl class="simple">
+<dt>“bought”: {</dt><dd><p>product_id: product_name,
+…</p>
+</dd>
+</dl>
+<p>},
+“recommended”: {</p>
+<blockquote>
+<div><p>product_id: product_name,
+…</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pred_index_mat</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></span>) – Matrix of predicted item indices with shape <cite>(n_users, k)</cite>.</p></li>
+<li><p><strong>item_inv_map</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]</span>) – Reverse mapping from internal item indices to original product ids.</p></li>
+<li><p><strong>user_inv_map</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]</span>) – Reverse mapping from internal user indices to original customer ids.</p></li>
+<li><p><strong>product_names_path</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></span>) – Path to the CSV file containing product ids and product names.</p></li>
+<li><p><strong>user_idx_list</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>] | <code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Optional list of global user indices corresponding to the rows of
+<cite>pred_index_mat</cite>. If None, row indices are treated as global ids.</p></li>
+<li><p><strong>edge_label_index</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">EdgeIndex</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Optional ground-truth user-item edges to attach as <cite>“bought”</cite>.</p></li>
+<li><p><strong>pretty_print</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – If True, print the decoded output as formatted JSON.</p></li>
+<li><p><strong>dump</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – If True, export recommendations to CSV.</p></li>
+<li><p><strong>dir</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Output CSV path used when <cite>dump=True</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Nested dictionary containing bought and recommended products
+for each customer.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>]]]</span></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – If <cite>dump=True</cite> and no output path is provided.</p></li>
+<li><p><strong>KeyError</strong> – If a predicted user or item index is not found in the provided
+    inverse mappings.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-graph_recc_sys.extraction">
+<span id="graph-recc-sys-extraction-module"></span><h2>graph_recc_sys.extraction module<a class="headerlink" href="#module-graph_recc_sys.extraction" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="graph_recc_sys.extraction.DatasetManager">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">graph_recc_sys.extraction.</span></span><span class="sig-name descname"><span class="pre">DatasetManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hyperparams</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/graph_recc_sys/extraction.html#DatasetManager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graph_recc_sys.extraction.DatasetManager" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Manage dataset extraction and local persistence for training data,
+recommendation tables, and analysis tables.</p>
+<p>Training datasets and recommendation tables are defined consistently from
+the provided hyperparameters, while analysis tables are downloaded through
+a separate flow.</p>
+<p>Expected directory structure:</p>
+<blockquote>
+<div><p>DATA_PATH/
+├── training_tables/
+│   ├── dataset_&lt;n_clients&gt;_&lt;min_connections&gt;_&lt;n_months&gt;/
+│   │   ├── basket_data.csv
+│   │   ├── customer.csv
+│   │   ├── product.csv
+│   │   ├── product_names.csv
+│   │   └── graph_data/
+├── rec_tables/
+│   └── &lt;k&gt;/
+│       ├── recommendationenginepredict_&lt;k&gt;.csv
+│       ├── bestseller_&lt;k&gt;.csv
+│       └── dataset_res_&lt;k&gt;_features_&lt;add_features&gt;.csv
+└── analysis_tables/</p>
+<blockquote>
+<div><dl class="simple">
+<dt>└── dataset_&lt;n_clients&gt;_&lt;min_connections&gt;_&lt;n_months&gt;/</dt><dd><p>├── basket_data.csv
+├── customer.csv
+└── product.csv</p>
+</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>hyperparams</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Configuration object containing dataset and recommendation settings.
+If provided, the manager initializes all paths needed for training
+and recommendation-table downloads.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.extraction.DatasetManager.base_data_path">
+<span class="sig-name descname"><span class="pre">base_data_path</span></span><a class="headerlink" href="#graph_recc_sys.extraction.DatasetManager.base_data_path" title="Link to this definition"></a></dt>
+<dd><p>Root directory used to store all generated data. Read from the
+<cite>DATA_PATH</cite> environment variable, defaulting to the current directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.extraction.DatasetManager.training_base_dir">
+<span class="sig-name descname"><span class="pre">training_base_dir</span></span><a class="headerlink" href="#graph_recc_sys.extraction.DatasetManager.training_base_dir" title="Link to this definition"></a></dt>
+<dd><p>Base directory for training datasets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.extraction.DatasetManager.rec_base_dir">
+<span class="sig-name descname"><span class="pre">rec_base_dir</span></span><a class="headerlink" href="#graph_recc_sys.extraction.DatasetManager.rec_base_dir" title="Link to this definition"></a></dt>
+<dd><p>Base directory for recommendation tables.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.extraction.DatasetManager.analysis_base_dir">
+<span class="sig-name descname"><span class="pre">analysis_base_dir</span></span><a class="headerlink" href="#graph_recc_sys.extraction.DatasetManager.analysis_base_dir" title="Link to this definition"></a></dt>
+<dd><p>Base directory for analysis datasets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.extraction.DatasetManager.hyperparams">
+<span class="sig-name descname"><span class="pre">hyperparams</span></span><a class="headerlink" href="#graph_recc_sys.extraction.DatasetManager.hyperparams" title="Link to this definition"></a></dt>
+<dd><p>Hyperparameter/configuration object passed at initialization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.extraction.DatasetManager.n_clienti">
+<span class="sig-name descname"><span class="pre">n_clienti</span></span><a class="headerlink" href="#graph_recc_sys.extraction.DatasetManager.n_clienti" title="Link to this definition"></a></dt>
+<dd><p>Number of clients used to define the dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.extraction.DatasetManager.n_minimo_connessioni">
+<span class="sig-name descname"><span class="pre">n_minimo_connessioni</span></span><a class="headerlink" href="#graph_recc_sys.extraction.DatasetManager.n_minimo_connessioni" title="Link to this definition"></a></dt>
+<dd><p>Minimum number of interactions/connections required.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.extraction.DatasetManager.k">
+<span class="sig-name descname"><span class="pre">k</span></span><a class="headerlink" href="#graph_recc_sys.extraction.DatasetManager.k" title="Link to this definition"></a></dt>
+<dd><p>Top-k cutoff used for recommendation tables.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.extraction.DatasetManager.n_mesi">
+<span class="sig-name descname"><span class="pre">n_mesi</span></span><a class="headerlink" href="#graph_recc_sys.extraction.DatasetManager.n_mesi" title="Link to this definition"></a></dt>
+<dd><p>Number of months used to filter the dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.extraction.DatasetManager.dataset_dir">
+<span class="sig-name descname"><span class="pre">dataset_dir</span></span><a class="headerlink" href="#graph_recc_sys.extraction.DatasetManager.dataset_dir" title="Link to this definition"></a></dt>
+<dd><p>Directory containing the training dataset files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.extraction.DatasetManager.graph_dir">
+<span class="sig-name descname"><span class="pre">graph_dir</span></span><a class="headerlink" href="#graph_recc_sys.extraction.DatasetManager.graph_dir" title="Link to this definition"></a></dt>
+<dd><p>Directory used to store graph-related processed artifacts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.extraction.DatasetManager.market_basket_path">
+<span class="sig-name descname"><span class="pre">market_basket_path</span></span><a class="headerlink" href="#graph_recc_sys.extraction.DatasetManager.market_basket_path" title="Link to this definition"></a></dt>
+<dd><p>CSV path for user-product interactions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.extraction.DatasetManager.product_desc_path">
+<span class="sig-name descname"><span class="pre">product_desc_path</span></span><a class="headerlink" href="#graph_recc_sys.extraction.DatasetManager.product_desc_path" title="Link to this definition"></a></dt>
+<dd><p>CSV path for product descriptive features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.extraction.DatasetManager.product_names_path">
+<span class="sig-name descname"><span class="pre">product_names_path</span></span><a class="headerlink" href="#graph_recc_sys.extraction.DatasetManager.product_names_path" title="Link to this definition"></a></dt>
+<dd><p>CSV path for product names.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.extraction.DatasetManager.customer_desc_path">
+<span class="sig-name descname"><span class="pre">customer_desc_path</span></span><a class="headerlink" href="#graph_recc_sys.extraction.DatasetManager.customer_desc_path" title="Link to this definition"></a></dt>
+<dd><p>CSV path for customer descriptive features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.extraction.DatasetManager.rec_table_dir">
+<span class="sig-name descname"><span class="pre">rec_table_dir</span></span><a class="headerlink" href="#graph_recc_sys.extraction.DatasetManager.rec_table_dir" title="Link to this definition"></a></dt>
+<dd><p>Directory containing recommendation tables for the selected <cite>k</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.extraction.DatasetManager.rec_engine_path">
+<span class="sig-name descname"><span class="pre">rec_engine_path</span></span><a class="headerlink" href="#graph_recc_sys.extraction.DatasetManager.rec_engine_path" title="Link to this definition"></a></dt>
+<dd><p>CSV path for the recommendation engine output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.extraction.DatasetManager.rec_bestseller_path">
+<span class="sig-name descname"><span class="pre">rec_bestseller_path</span></span><a class="headerlink" href="#graph_recc_sys.extraction.DatasetManager.rec_bestseller_path" title="Link to this definition"></a></dt>
+<dd><p>CSV path for the bestseller baseline output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.extraction.DatasetManager.rec_gnn_path">
+<span class="sig-name descname"><span class="pre">rec_gnn_path</span></span><a class="headerlink" href="#graph_recc_sys.extraction.DatasetManager.rec_gnn_path" title="Link to this definition"></a></dt>
+<dd><p>CSV path intended for GNN recommendation output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.extraction.DatasetManager.analysis_dir">
+<span class="sig-name descname"><span class="pre">analysis_dir</span></span><a class="headerlink" href="#graph_recc_sys.extraction.DatasetManager.analysis_dir" title="Link to this definition"></a></dt>
+<dd><p>Directory containing analysis tables for a specific dataset setup.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.extraction.DatasetManager.analysis_basket_path">
+<span class="sig-name descname"><span class="pre">analysis_basket_path</span></span><a class="headerlink" href="#graph_recc_sys.extraction.DatasetManager.analysis_basket_path" title="Link to this definition"></a></dt>
+<dd><p>CSV path for the analysis interaction table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.extraction.DatasetManager.analysis_product_path">
+<span class="sig-name descname"><span class="pre">analysis_product_path</span></span><a class="headerlink" href="#graph_recc_sys.extraction.DatasetManager.analysis_product_path" title="Link to this definition"></a></dt>
+<dd><p>CSV path for the analysis product table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.extraction.DatasetManager.analysis_customer_path">
+<span class="sig-name descname"><span class="pre">analysis_customer_path</span></span><a class="headerlink" href="#graph_recc_sys.extraction.DatasetManager.analysis_customer_path" title="Link to this definition"></a></dt>
+<dd><p>CSV path for the analysis customer table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="graph_recc_sys.extraction.DatasetManager.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/graph_recc_sys/extraction.html#DatasetManager.build"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graph_recc_sys.extraction.DatasetManager.build" title="Link to this definition"></a></dt>
+<dd><p>Create the dataset required for model training and inference.</p>
+<p>This method downloads and stores, if missing:
+- market basket interactions
+- product features
+- customer features
+- product names</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path to the dataset directory as a string.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="graph_recc_sys.extraction.DatasetManager.download_rec_table">
+<span class="sig-name descname"><span class="pre">download_rec_table</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/graph_recc_sys/extraction.html#DatasetManager.download_rec_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graph_recc_sys.extraction.DatasetManager.download_rec_table" title="Link to this definition"></a></dt>
+<dd><p>Download the recommendation tables for the configured top-k value.</p>
+<p>This method requires <cite>hyperparams</cite> to have been provided at construction
+time, since <cite>k</cite> and related paths are derived from it.</p>
+<p>It downloads, if missing:
+- the recommendation engine output
+- the bestseller baseline output</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A tuple containing:
+- the recommendation engine CSV path
+- the bestseller CSV path</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span></p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If the manager was initialized without <cite>hyperparams</cite>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="graph_recc_sys.extraction.DatasetManager.download_analysis_table">
+<span class="sig-name descname"><span class="pre">download_analysis_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_clienti</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_connessioni_minime</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_mesi</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/graph_recc_sys/extraction.html#DatasetManager.download_analysis_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graph_recc_sys.extraction.DatasetManager.download_analysis_table" title="Link to this definition"></a></dt>
+<dd><p>Download the enriched tables used for analysis.</p>
+<p>The tables are stored under:</p>
+<blockquote>
+<div><p>analysis_tables/&lt;dataset_name&gt;/</p>
+</div></blockquote>
+<p>For this call, the provided parameters temporarily overwrite the current
+dataset configuration stored in the instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_clienti</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – Number of clients to include.</p></li>
+<li><p><strong>n_connessioni_minime</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – Minimum number of interactions/connections required.</p></li>
+<li><p><strong>n_mesi</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – Number of months to include.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Path to the analysis directory as a string.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-graph_recc_sys.graph_dataset">
+<span id="graph-recc-sys-graph-dataset-module"></span><h2>graph_recc_sys.graph_dataset module<a class="headerlink" href="#module-graph_recc_sys.graph_dataset" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_dataset.MarketBasketGraphBuilder">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">graph_recc_sys.graph_dataset.</span></span><span class="sig-name descname"><span class="pre">MarketBasketGraphBuilder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_manager</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#graph_recc_sys.extraction.DatasetManager" title="graph_recc_sys.extraction.DatasetManager"><span class="pre">DatasetManager</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/graph_recc_sys/graph_dataset.html#MarketBasketGraphBuilder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graph_recc_sys.graph_dataset.MarketBasketGraphBuilder" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DataClass</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">InMemoryDataset</span></code></p>
+<p>Build and manage a PyTorch Geometric heterogeneous graph from market basket,
+product master data, and customer master data.</p>
+<p>This class:
+- reads the input CSV files
+- preprocesses the source tables
+- builds a heterogeneous user-item graph
+- attaches node features for users and products
+- saves the processed graph to disk
+- saves and reloads the mappings between original ids and internal indices</p>
+<p>The resulting graph contains:
+- user nodes
+- product nodes
+- edges between users and products representing purchase interactions
+- edge timestamps for possible temporal splits
+- numerical node features for both users and products</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dataset_manager</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#graph_recc_sys.extraction.DatasetManager" title="graph_recc_sys.extraction.DatasetManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">DatasetManager</span></code></a></span>) – Object containing the dataset paths and the target dataset directory.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_dataset.MarketBasketGraphBuilder.market_basket_dir">
+<span class="sig-name descname"><span class="pre">market_basket_dir</span></span><a class="headerlink" href="#graph_recc_sys.graph_dataset.MarketBasketGraphBuilder.market_basket_dir" title="Link to this definition"></a></dt>
+<dd><p>Path to the CSV file containing user-product interactions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_dataset.MarketBasketGraphBuilder.product_desc_dir">
+<span class="sig-name descname"><span class="pre">product_desc_dir</span></span><a class="headerlink" href="#graph_recc_sys.graph_dataset.MarketBasketGraphBuilder.product_desc_dir" title="Link to this definition"></a></dt>
+<dd><p>Path to the CSV file containing product descriptive features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_dataset.MarketBasketGraphBuilder.customer_desc_dir">
+<span class="sig-name descname"><span class="pre">customer_desc_dir</span></span><a class="headerlink" href="#graph_recc_sys.graph_dataset.MarketBasketGraphBuilder.customer_desc_dir" title="Link to this definition"></a></dt>
+<dd><p>Path to the CSV file containing customer descriptive features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_dataset.MarketBasketGraphBuilder._market_basket">
+<span class="sig-name descname"><span class="pre">_market_basket</span></span><a class="headerlink" href="#graph_recc_sys.graph_dataset.MarketBasketGraphBuilder._market_basket" title="Link to this definition"></a></dt>
+<dd><p>Raw interaction table loaded from CSV.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_dataset.MarketBasketGraphBuilder._product_desc">
+<span class="sig-name descname"><span class="pre">_product_desc</span></span><a class="headerlink" href="#graph_recc_sys.graph_dataset.MarketBasketGraphBuilder._product_desc" title="Link to this definition"></a></dt>
+<dd><p>Raw product feature table loaded from CSV.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_dataset.MarketBasketGraphBuilder._customer_desc">
+<span class="sig-name descname"><span class="pre">_customer_desc</span></span><a class="headerlink" href="#graph_recc_sys.graph_dataset.MarketBasketGraphBuilder._customer_desc" title="Link to this definition"></a></dt>
+<dd><p>Raw customer feature table loaded from CSV.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_dataset.MarketBasketGraphBuilder.user_map">
+<span class="sig-name descname"><span class="pre">user_map</span></span><a class="headerlink" href="#graph_recc_sys.graph_dataset.MarketBasketGraphBuilder.user_map" title="Link to this definition"></a></dt>
+<dd><p>Mapping from original user identifier to internal graph index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[Any, int] | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_dataset.MarketBasketGraphBuilder.item_map">
+<span class="sig-name descname"><span class="pre">item_map</span></span><a class="headerlink" href="#graph_recc_sys.graph_dataset.MarketBasketGraphBuilder.item_map" title="Link to this definition"></a></dt>
+<dd><p>Mapping from original product identifier to internal graph index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[Any, int] | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_dataset.MarketBasketGraphBuilder.user_inv_map">
+<span class="sig-name descname"><span class="pre">user_inv_map</span></span><a class="headerlink" href="#graph_recc_sys.graph_dataset.MarketBasketGraphBuilder.user_inv_map" title="Link to this definition"></a></dt>
+<dd><p>Reverse mapping from internal user index to original identifier.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[int, Any] | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_dataset.MarketBasketGraphBuilder.item_inv_map">
+<span class="sig-name descname"><span class="pre">item_inv_map</span></span><a class="headerlink" href="#graph_recc_sys.graph_dataset.MarketBasketGraphBuilder.item_inv_map" title="Link to this definition"></a></dt>
+<dd><p>Reverse mapping from internal product index to original identifier.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[int, Any] | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_dataset.MarketBasketGraphBuilder._hetero_data">
+<span class="sig-name descname"><span class="pre">_hetero_data</span></span><a class="headerlink" href="#graph_recc_sys.graph_dataset.MarketBasketGraphBuilder._hetero_data" title="Link to this definition"></a></dt>
+<dd><p>Temporary graph object used during processing.
+The final graph is then stored on disk and reloaded through
+<cite>InMemoryDataset</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HeteroData | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_dataset.MarketBasketGraphBuilder.raw_file_names">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">raw_file_names</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#graph_recc_sys.graph_dataset.MarketBasketGraphBuilder.raw_file_names" title="Link to this definition"></a></dt>
+<dd><p>Return the list of raw input files used by the dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Paths to the interaction, product, and customer CSV files.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_dataset.MarketBasketGraphBuilder.processed_file_names">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">processed_file_names</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#graph_recc_sys.graph_dataset.MarketBasketGraphBuilder.processed_file_names" title="Link to this definition"></a></dt>
+<dd><p>Return the list of processed dataset file names.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Names of files generated during processing.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_dataset.MarketBasketGraphBuilder.process">
+<span class="sig-name descname"><span class="pre">process</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/graph_recc_sys/graph_dataset.html#MarketBasketGraphBuilder.process"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graph_recc_sys.graph_dataset.MarketBasketGraphBuilder.process" title="Link to this definition"></a></dt>
+<dd><p>Build the heterogeneous graph and save it to disk.</p>
+<p>The processing pipeline:
+1. Read the CSV files
+2. Preprocess the input tables
+3. Build the user-item interaction graph
+4. Add product node features
+5. Add customer node features
+6. Convert the graph to an undirected version
+7. Optionally apply <cite>pre_filter</cite> and <cite>pre_transform</cite>
+8. Save the processed graph
+9. Save the id mappings to disk</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_dataset.MarketBasketGraphBuilder.graph">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">graph</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">HeteroData</span></span><a class="headerlink" href="#graph_recc_sys.graph_dataset.MarketBasketGraphBuilder.graph" title="Link to this definition"></a></dt>
+<dd><p>Return the processed heterogeneous graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The processed graph stored by the dataset.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>HeteroData</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-graph_recc_sys.graph_loader">
+<span id="graph-recc-sys-graph-loader-module"></span><h2>graph_recc_sys.graph_loader module<a class="headerlink" href="#module-graph_recc_sys.graph_loader" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_loader.GraphLoader">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">graph_recc_sys.graph_loader.</span></span><span class="sig-name descname"><span class="pre">GraphLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">HeteroData</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hyperparams</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/graph_recc_sys/graph_loader.html#GraphLoader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graph_recc_sys.graph_loader.GraphLoader" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DataClass</span></code></p>
+<p>Utility class for building temporal train/validation/test splits and
+corresponding PyG loaders for link prediction on a heterogeneous user-item graph.</p>
+<p>The class sorts interactions by time, creates temporal edge splits, builds
+subgraphs containing only the allowed context edges for each phase, and
+instantiates <cite>LinkNeighborLoader</cite> objects for training and validation.</p>
+<p>It also prepares:
+- edge label indices for training, validation, and test
+- exclusion links for validation and test, used to filter out already-seen</p>
+<blockquote>
+<div><p>interactions from recommendation candidates</p>
+</div></blockquote>
+<p>The split strategy is temporal:
+- training targets come from the earliest interactions
+- validation targets come after training
+- test targets come after validation
+- validation and test context only include training edges</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">HeteroData</span></code></span>) – Input heterogeneous graph containing user-item interactions and timestamps.</p></li>
+<li><p><strong>hyperparams</strong> – Configuration object containing batching and neighborhood sampling
+hyperparameters.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_loader.GraphLoader.data">
+<span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#graph_recc_sys.graph_loader.GraphLoader.data" title="Link to this definition"></a></dt>
+<dd><p>Full heterogeneous graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HeteroData</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_loader.GraphLoader.per_val">
+<span class="sig-name descname"><span class="pre">per_val</span></span><a class="headerlink" href="#graph_recc_sys.graph_loader.GraphLoader.per_val" title="Link to this definition"></a></dt>
+<dd><p>Fraction of edges reserved for validation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_loader.GraphLoader.per_test">
+<span class="sig-name descname"><span class="pre">per_test</span></span><a class="headerlink" href="#graph_recc_sys.graph_loader.GraphLoader.per_test" title="Link to this definition"></a></dt>
+<dd><p>Fraction of edges reserved for test.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_loader.GraphLoader.batch_size">
+<span class="sig-name descname"><span class="pre">batch_size</span></span><a class="headerlink" href="#graph_recc_sys.graph_loader.GraphLoader.batch_size" title="Link to this definition"></a></dt>
+<dd><p>Batch size used by the link neighbor loaders.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_loader.GraphLoader.num_neighbors">
+<span class="sig-name descname"><span class="pre">num_neighbors</span></span><a class="headerlink" href="#graph_recc_sys.graph_loader.GraphLoader.num_neighbors" title="Link to this definition"></a></dt>
+<dd><p>Number of sampled neighbors per hop.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_loader.GraphLoader.mode">
+<span class="sig-name descname"><span class="pre">mode</span></span><a class="headerlink" href="#graph_recc_sys.graph_loader.GraphLoader.mode" title="Link to this definition"></a></dt>
+<dd><p>Negative sampling mode passed to <cite>LinkNeighborLoader</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_loader.GraphLoader.train_loader">
+<span class="sig-name descname"><span class="pre">train_loader</span></span><a class="headerlink" href="#graph_recc_sys.graph_loader.GraphLoader.train_loader" title="Link to this definition"></a></dt>
+<dd><p>Training loader.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>LinkNeighborLoader | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_loader.GraphLoader.val_loader">
+<span class="sig-name descname"><span class="pre">val_loader</span></span><a class="headerlink" href="#graph_recc_sys.graph_loader.GraphLoader.val_loader" title="Link to this definition"></a></dt>
+<dd><p>Validation loader.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>LinkNeighborLoader | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_loader.GraphLoader.train_subgraph">
+<span class="sig-name descname"><span class="pre">train_subgraph</span></span><a class="headerlink" href="#graph_recc_sys.graph_loader.GraphLoader.train_subgraph" title="Link to this definition"></a></dt>
+<dd><p>Subgraph used for training.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HeteroData | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_loader.GraphLoader.val_subgraph">
+<span class="sig-name descname"><span class="pre">val_subgraph</span></span><a class="headerlink" href="#graph_recc_sys.graph_loader.GraphLoader.val_subgraph" title="Link to this definition"></a></dt>
+<dd><p>Subgraph used for validation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HeteroData | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_loader.GraphLoader.test_subgraph">
+<span class="sig-name descname"><span class="pre">test_subgraph</span></span><a class="headerlink" href="#graph_recc_sys.graph_loader.GraphLoader.test_subgraph" title="Link to this definition"></a></dt>
+<dd><p>Subgraph used for test-time encoding/evaluation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HeteroData | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_loader.GraphLoader.train_edge_label_index">
+<span class="sig-name descname"><span class="pre">train_edge_label_index</span></span><a class="headerlink" href="#graph_recc_sys.graph_loader.GraphLoader.train_edge_label_index" title="Link to this definition"></a></dt>
+<dd><p>Positive training edge indices used as labels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_loader.GraphLoader.val_edge_label_index">
+<span class="sig-name descname"><span class="pre">val_edge_label_index</span></span><a class="headerlink" href="#graph_recc_sys.graph_loader.GraphLoader.val_edge_label_index" title="Link to this definition"></a></dt>
+<dd><p>Validation target edge indices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>EdgeIndex | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_loader.GraphLoader.test_edge_label_index">
+<span class="sig-name descname"><span class="pre">test_edge_label_index</span></span><a class="headerlink" href="#graph_recc_sys.graph_loader.GraphLoader.test_edge_label_index" title="Link to this definition"></a></dt>
+<dd><p>Test target edge indices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>EdgeIndex | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_loader.GraphLoader.val_exclude_links">
+<span class="sig-name descname"><span class="pre">val_exclude_links</span></span><a class="headerlink" href="#graph_recc_sys.graph_loader.GraphLoader.val_exclude_links" title="Link to this definition"></a></dt>
+<dd><p>Validation edges to exclude from ranking because they were already seen
+in the context.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>EdgeIndex | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_loader.GraphLoader.test_exclude_links">
+<span class="sig-name descname"><span class="pre">test_exclude_links</span></span><a class="headerlink" href="#graph_recc_sys.graph_loader.GraphLoader.test_exclude_links" title="Link to this definition"></a></dt>
+<dd><p>Test edges to exclude from ranking because they were already seen
+in the context.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>EdgeIndex | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="graph_recc_sys.graph_loader.GraphLoader.get_loaders">
+<span class="sig-name descname"><span class="pre">get_loaders</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/graph_recc_sys/graph_loader.html#GraphLoader.get_loaders"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graph_recc_sys.graph_loader.GraphLoader.get_loaders" title="Link to this definition"></a></dt>
+<dd><p>Build and return all graph splits, loaders, and evaluation structures.</p>
+<p>This is the main public entry point of the class. It:
+- evaluates an approximate memory footprint
+- creates the temporal split
+- returns all relevant artifacts for training and evaluation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dictionary containing:
+- <cite>train_subgraph</cite>: training subgraph
+- <cite>train_loader</cite>: training <cite>LinkNeighborLoader</cite>
+- <cite>train_edge_label_index</cite>: training edge labels
+- <cite>val_loader</cite>: validation <cite>LinkNeighborLoader</cite>
+- <cite>val_subgraph</cite>: validation subgraph
+- <cite>test_subgraph</cite>: test subgraph
+- <cite>test_edge_label_index</cite>: test target edges
+- <cite>test_exclude_links</cite>: test exclusion links
+- <cite>val_edge_label_index</cite>: validation target edges
+- <cite>val_exclude_links</cite>: validation exclusion links</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-graph_recc_sys.neural_network">
+<span id="graph-recc-sys-neural-network-module"></span><h2>graph_recc_sys.neural_network module<a class="headerlink" href="#module-graph_recc_sys.neural_network" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="graph_recc_sys.neural_network.RecommenderModel">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">graph_recc_sys.neural_network.</span></span><span class="sig-name descname"><span class="pre">RecommenderModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">HeteroData</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hyperparams</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/graph_recc_sys/neural_network.html#RecommenderModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graph_recc_sys.neural_network.RecommenderModel" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DataClass</span></code></p>
+<p>Neural model for link prediction on a heterogeneous user-item graph.</p>
+<p>The model builds initial user and item node representations either from
+learnable free embeddings or from available node features through
+embedding/linear transformations. These representations are then propagated
+through a stack of heterogeneous GraphSAGE convolution layers and finally
+projected into a latent output space.</p>
+<p>In <cite>binary</cite> mode, the decoder produces a score for each candidate edge
+using the dot product between user and item embeddings.
+In <cite>triplet</cite> mode, the model directly returns normalized node embeddings,
+which can be used with metric-learning or contrastive objectives.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">HeteroData</span></code></span>) – Heterogeneous graph containing nodes, node features, and edges.</p></li>
+<li><p><strong>hyperparams</strong> – Configuration object containing all model hyperparameters.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Hyperparameters:</dt><dd><dl class="simple">
+<dt>n_conv_layer (int):</dt><dd><p>Number of heterogeneous convolution layers.</p>
+</dd>
+<dt>n_projs_layer (int):</dt><dd><p>Number of hidden projection layers before the final output layer.</p>
+</dd>
+<dt>dropout_rate (float):</dt><dd><p>Dropout rate applied after convolutions and projection layers.</p>
+</dd>
+<dt>input_channels (int):</dt><dd><p>Dimension of the initial node representations.</p>
+</dd>
+<dt>hidden_channels (int):</dt><dd><p>Dimension of the hidden representations after graph convolutions.</p>
+</dd>
+<dt>out_channels (int):</dt><dd><p>Final latent embedding dimension.</p>
+</dd>
+<dt>mode (str):</dt><dd><p>Output mode of the model. Supported values: <cite>“binary”</cite> or <cite>“triplet”</cite>.</p>
+</dd>
+<dt>two_tower (bool):</dt><dd><p>If True, uses separate projection heads for users and items.
+Otherwise, a shared projection head is used.</p>
+</dd>
+<dt>proj_norm (str | None):</dt><dd><p>Normalization type used in projection layers.
+Supported values: <cite>“LayerNorm”</cite>, <cite>“BatchNorm”</cite>, or None.</p>
+</dd>
+<dt>aggr (str):</dt><dd><p>Aggregation strategy used inside SAGEConv.</p>
+</dd>
+<dt>add_features (bool):</dt><dd><p>If True, initial node representations are built from node features.
+If False, free embeddings are used for users and items.</p>
+</dd>
+<dt>num_stochastic_item_features (int):</dt><dd><p>Number of additional free embedding components concatenated to item
+representations when <cite>add_features=True</cite>.</p>
+</dd>
+<dt>num_stochastic_user_features (int):</dt><dd><p>Number of additional free embedding components concatenated to user
+representations when <cite>add_features=True</cite>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.neural_network.RecommenderModel.user_emb">
+<span class="sig-name descname"><span class="pre">user_emb</span></span><a class="headerlink" href="#graph_recc_sys.neural_network.RecommenderModel.user_emb" title="Link to this definition"></a></dt>
+<dd><p>Free user embedding table used when <cite>add_features=False</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Embedding</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.neural_network.RecommenderModel.item_emb">
+<span class="sig-name descname"><span class="pre">item_emb</span></span><a class="headerlink" href="#graph_recc_sys.neural_network.RecommenderModel.item_emb" title="Link to this definition"></a></dt>
+<dd><p>Free item embedding table used when <cite>add_features=False</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Embedding</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.neural_network.RecommenderModel.user_embeddings">
+<span class="sig-name descname"><span class="pre">user_embeddings</span></span><a class="headerlink" href="#graph_recc_sys.neural_network.RecommenderModel.user_embeddings" title="Link to this definition"></a></dt>
+<dd><p>Dictionary of modules used to encode user features when
+<cite>add_features=True</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ModuleDict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.neural_network.RecommenderModel.item_embeddings">
+<span class="sig-name descname"><span class="pre">item_embeddings</span></span><a class="headerlink" href="#graph_recc_sys.neural_network.RecommenderModel.item_embeddings" title="Link to this definition"></a></dt>
+<dd><p>Dictionary of modules used to encode item features when
+<cite>add_features=True</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ModuleDict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.neural_network.RecommenderModel.user_stochastic_emb">
+<span class="sig-name descname"><span class="pre">user_stochastic_emb</span></span><a class="headerlink" href="#graph_recc_sys.neural_network.RecommenderModel.user_stochastic_emb" title="Link to this definition"></a></dt>
+<dd><p>Optional additional learnable embedding for users.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Embedding</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.neural_network.RecommenderModel.item_stochastic_emb">
+<span class="sig-name descname"><span class="pre">item_stochastic_emb</span></span><a class="headerlink" href="#graph_recc_sys.neural_network.RecommenderModel.item_stochastic_emb" title="Link to this definition"></a></dt>
+<dd><p>Optional additional learnable embedding for items.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Embedding</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.neural_network.RecommenderModel.convs">
+<span class="sig-name descname"><span class="pre">convs</span></span><a class="headerlink" href="#graph_recc_sys.neural_network.RecommenderModel.convs" title="Link to this definition"></a></dt>
+<dd><p>Stack of <cite>HeteroConv</cite> layers based on <cite>SAGEConv</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ModuleList</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.neural_network.RecommenderModel.proj_layer">
+<span class="sig-name descname"><span class="pre">proj_layer</span></span><a class="headerlink" href="#graph_recc_sys.neural_network.RecommenderModel.proj_layer" title="Link to this definition"></a></dt>
+<dd><p>Shared projection stack used when <cite>two_tower=False</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Sequential</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.neural_network.RecommenderModel.proj_user_layer">
+<span class="sig-name descname"><span class="pre">proj_user_layer</span></span><a class="headerlink" href="#graph_recc_sys.neural_network.RecommenderModel.proj_user_layer" title="Link to this definition"></a></dt>
+<dd><p>User-specific projection stack used when <cite>two_tower=True</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Sequential</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_recc_sys.neural_network.RecommenderModel.proj_item_layer">
+<span class="sig-name descname"><span class="pre">proj_item_layer</span></span><a class="headerlink" href="#graph_recc_sys.neural_network.RecommenderModel.proj_item_layer" title="Link to this definition"></a></dt>
+<dd><p>Item-specific projection stack used when <cite>two_tower=True</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Sequential</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="graph_recc_sys.neural_network.RecommenderModel.encoder">
+<span class="sig-name descname"><span class="pre">encoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">HeteroData</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/graph_recc_sys/neural_network.html#RecommenderModel.encoder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graph_recc_sys.neural_network.RecommenderModel.encoder" title="Link to this definition"></a></dt>
+<dd><p>Encode user and item nodes into latent representations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="graph_recc_sys.neural_network.RecommenderModel.decoder">
+<span class="sig-name descname"><span class="pre">decoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">z_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_label_index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/graph_recc_sys/neural_network.html#RecommenderModel.decoder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graph_recc_sys.neural_network.RecommenderModel.decoder" title="Link to this definition"></a></dt>
+<dd><p>Decode user-item pairs into scalar compatibility scores.</p>
+<p>The score is computed as the dot product between user and item
+latent vectors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>z_dict</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></span>) – Dictionary of node embeddings.</p></li>
+<li><p><strong>edge_label_index</strong> – Tensor containing the user and item indices of candidate edges.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Score for each candidate edge.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="graph_recc_sys.neural_network.RecommenderModel.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">HeteroData</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/graph_recc_sys/neural_network.html#RecommenderModel.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graph_recc_sys.neural_network.RecommenderModel.forward" title="Link to this definition"></a></dt>
+<dd><p>Run the full forward pass of the model.</p>
+<p>In <cite>binary</cite> mode, returns edge scores for link prediction.
+In <cite>triplet</cite> mode, returns normalized user/item embeddings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">HeteroData</span></code></span>) – Input heterogeneous graph.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>In <cite>binary</cite> mode: tensor of edge scores</p></li>
+<li><p>In <cite>triplet</cite> mode: dictionary of normalized node embeddings</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor | dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-graph_recc_sys.query">
+<span id="graph-recc-sys-query-module"></span><h2>graph_recc_sys.query module<a class="headerlink" href="#module-graph_recc_sys.query" title="Link to this heading"></a></h2>
+</section>
+<section id="module-graph_recc_sys">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-graph_recc_sys" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Matteo Massari.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

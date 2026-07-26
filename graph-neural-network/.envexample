@@ -1,0 +1,24 @@
+# Per utilizzare un'istanza di MLflow in locale, definire le seguenti variabili:
+# - MLFLOW_BACKEND_URI: backend store dei metadati MLflow
+# - MLFLOW_ARTIFACT_ROOT: directory dove salvare gli artifact
+# - MLFLOW_HOST: host su cui esporre il server MLflow
+# - MLFLOW_PORT: porta del server MLflow
+
+MLFLOW_BACKEND_URI=sqlite:////path/mlflow.db
+MLFLOW_ARTIFACT_ROOT=file:///path/artifacts
+MLFLOW_HOST=0.0.0.0
+MLFLOW_PORT=1234
+
+# Se l'istanza e' locale:
+MLFLOW_TRACKING_URI=http://0.0.0.0:1234
+MLFLOW_EXPERIMENT=Nome Esperimento
+
+# Se l'istanza non e' locale:
+# MLFLOW_EXPERIMENT=progetto
+# MLFLOW_TRACKING_USERNAME=esperimento
+# MLFLOW_TRACKING_PASSWORD=password
+# MLFLOW_TRACKING_URI=https://istanza-mlflow
+# MLFLOW_TRACKING_INSECURE_TLS=true
+
+# Indicare dove si trovano i dati
+DATA_PATH=/path
