@@ -1,0 +1,57 @@
+name: Publish documentation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docs/**"
+      - "graph-neural-network/src/**"
+      - "graph-rag-agent/src/**"
+      - "pipeline/**"
+      - "tests/check_docs_links.py"
+      - "Makefile"
+      - "pyproject.toml"
+      - "uv.lock"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Install uv and Python
+        uses: astral-sh/setup-uv@v6
+        with:
+          version: 0.12.19
+          python-version: "3.12"
+      - name: Install locked dependencies
+        run: uv sync --locked
+      - name: Build English and Italian documentation
+        run: make docs
+      - name: Disable Jekyll processing
+        run: touch docs/_build/html/.nojekyll
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Upload documentation artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: docs/_build/html
+      - name: Publish to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
