@@ -54,17 +54,19 @@ class Inference(DataClass):
         L2-normalized before scoring. In that case, matrix multiplication is
         equivalent to cosine similarity.
 
-        Otherwise, the method uses raw dot-product scores:
+        With `euclidean`, scores are negative Euclidean distances.
+        With ``dot``, the method uses raw dot-product scores:
 
-        $$
-        S = Q D^T
-        $$
+        .. math::
+
+            S = Q D^T
 
         where:
-        - $$Q$$ is the query embedding matrix
-        - $$D$$ is the destination embedding matrix
 
-        Excluded edges are masked by setting their score to $$-\infty$$ before
+        - :math:`Q` is the query embedding matrix
+        - :math:`D` is the destination embedding matrix
+
+        Excluded edges are masked by setting their score to negative infinity before
         top-k extraction.
 
         Args:
@@ -75,8 +77,7 @@ class Inference(DataClass):
             k (int):
                 Number of top items to retrieve for each query.
             similarity (str):
-                Similarity type. If `"cosine"`, embeddings are normalized before
-                scoring. Otherwise, raw dot product is used.
+                Similarity type: `"cosine"`, `"euclidean"`, or `"dot"`.
             exclude_links (EdgeIndex | torch.Tensor | None):
                 Optional tensor of shape `(2, num_excluded_edges)` containing
                 `(row, col)` pairs to mask from the score matrix.
@@ -90,7 +91,14 @@ class Inference(DataClass):
             query_emb = F.normalize(query_emb, dim=-1)
             dst_emb = F.normalize(dst_emb, dim=-1)
 
-        scores = query_emb @ dst_emb.T
+        if similarity == "euclidean":
+            scores = -torch.cdist(query_emb, dst_emb)
+        elif similarity in {"cosine", "dot"}:
+            scores = query_emb @ dst_emb.T
+        else:
+            raise ValueError(f"Unsupported similarity: {similarity}")
+        if not 1 <= k <= dst_emb.size(0):
+            raise ValueError("k must be between 1 and the number of products")
 
         if exclude_links is not None:
             rows = exclude_links[0]
@@ -106,6 +114,8 @@ class Inference(DataClass):
         else:
             logging.warning("No exclude_links were provided. This may cause leakage.")
 
+        if (torch.isfinite(scores).sum(dim=1) < k).any():
+            raise ValueError("Not enough non-excluded products for top-k")
         _, pred_index_mat = scores.topk(k, dim=-1)
         return pred_index_mat
 

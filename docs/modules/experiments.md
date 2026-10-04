@@ -1,11 +1,14 @@
-# Esperimenti
+# Experiments
 
-Questa sezione raccoglie gli fatti lato Graph Neural Network, seguendo lo storico degli esperimenti fatti (quello sull'agente è un placeholder)
+These pages preserve historical notes of network development and
+of the agent, with comparisons, examples and identifications of run of the relative periods.
+The parameters and behaviors shown do not replace the configuration
+current. To play the demo use the [operational guide](getting_started.md);
+for recent tests read the [verifications performed](../verification.md).
 
 ```{toctree}
 :maxdepth: 1
-:caption: Documentation
 
-Storico del Modello <experiments/model_history>
-Storico dell'agente <experiments/agent_history>
+Model history <experiments/model_history>
+History of Agent <experiments/agent_history>
 ```

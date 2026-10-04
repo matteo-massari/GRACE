@@ -1,3 +1,4 @@
+import hashlib
 import os
 import pickle
 from typing import Any
@@ -96,17 +97,28 @@ class MarketBasketGraphBuilder(DataClass, InMemoryDataset):
         # Note: the actual persisted graph is stored in self.data by InMemoryDataset
         self._hetero_data: HeteroData | None = None
 
+        # Rebuild the cached graph when any input CSV changes.
+        digest = hashlib.sha256()
+        for path in (self.market_basket_dir, self.product_desc_dir, self.customer_desc_dir):
+            digest.update(path.read_bytes())
+        self._source_fingerprint = digest.hexdigest()
+        fingerprint_path = dataset_manager.dataset_dir / "processed" / "source.sha256"
+        rebuild = (not fingerprint_path.exists()
+                   or fingerprint_path.read_text() != self._source_fingerprint)
+
         InMemoryDataset.__init__(
             self,
             dataset_manager.dataset_dir,
             transform=None,
             pre_transform=None,
             pre_filter=None,
+            force_reload=rebuild,
         )
 
         # Load processed graph from disk
         self.load(self.processed_paths[0])
         self._load_mappings()
+        fingerprint_path.write_text(self._source_fingerprint)
 
     def _read_csv(self) -> None:
         """

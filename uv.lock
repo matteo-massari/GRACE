@@ -2800,7 +2800,7 @@ requires-dist = [
     { name = "lightning-bolts", specifier = ">=0.7.0" },
     { name = "marimo", specifier = ">=0.23.11" },
     { name = "matplotlib", specifier = ">=3.10.8" },
-    { name = "mlflow", specifier = ">=3.5.1" },
+    { name = "mlflow", specifier = ">=3.14.0" },
     { name = "myst-parser", specifier = ">=5.1.0" },
     { name = "nbconvert", specifier = ">=7.17.1" },
     { name = "nbformat", specifier = ">=5.10.4" },

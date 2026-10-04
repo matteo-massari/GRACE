@@ -1,0 +1,11 @@
+{% extends "!layout.html" %}
+{% block document %}
+<nav aria-label="Language" style="margin-bottom:1.2em;padding:.65em 1em;background:#eef5fa;border-left:3px solid #2980b9">
+  <strong>Language:</strong>
+  {% set other_page = pagename if not pagename.startswith('_modules/') else 'index' %}
+  {% set other_url = pathto('index.html', 1)[:-10] ~ other_language_prefix ~ other_page ~ '.html' %}
+  {% if language == 'en' %}<span aria-current="page">English</span> · <a lang="it" hreflang="it" href="{{ other_url }}">Italiano</a>
+  {% else %}<a lang="en" hreflang="en" href="{{ other_url }}">English</a> · <span aria-current="page">Italiano</span>{% endif %}
+</nav>
+{{ super() }}
+{% endblock %}

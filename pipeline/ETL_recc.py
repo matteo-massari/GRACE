@@ -7,8 +7,8 @@ from config import config
 load_dotenv()
 
 BATCH_SIZE = 1000
-CSV_PATH = "Roba della raccomandazione"
-DATABASE = "neo4j"
+CSV_PATH = os.getenv("RECOMMENDATIONS_CSV_PATH", "database/gnn/rec_tables/10/dataset_res_10_features_True.csv")
+DATABASE = os.getenv("NEO4J_DATABASE", "neo4j")
 MAX_DEBUG_SAMPLES = 100
 
 
@@ -206,7 +206,7 @@ def load_recommendations_from_csv(driver, csv_path, batch_size=BATCH_SIZE, datab
 def main():
     driver = config.neo4j_driver
     try:
-        # Verifica stato grafo
+        # Check graph state
         with driver.session(database=DATABASE) as session:
             customer_count = session.run(
                 "MATCH (c:Customer) RETURN count(c) AS n"
@@ -234,7 +234,7 @@ def main():
             database=DATABASE
         )
 
-        # Verifica finale
+        # Final verification
         with driver.session(database=DATABASE) as session:
             total_rec = session.run(
                 "MATCH ()-[r:RECOMMENDED_TO]->() RETURN count(r) AS n"

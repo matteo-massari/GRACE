@@ -184,7 +184,7 @@ class NeuralNetworkEngine:
             optimizer=optimizer,
             warmup_period=self.params.warmup_period * len(self.train_loader),
         )
-        scaler = amp.GradScaler(device=device)
+        scaler = amp.GradScaler(device=device.type, enabled=device.type == "cuda")
 
         loss_name = self.params.loss_function
         logging.info(f"Loss function: {loss_name}")
@@ -261,6 +261,7 @@ class NeuralNetworkEngine:
                 if not dry_run:
                     model_info = mlflow.pytorch.log_model(
                         pytorch_model=model,
+                        serialization_format="pickle",
                         name=f"checkpoint_{epoch}",
                         step=epoch,
                     )
@@ -304,12 +305,6 @@ class NeuralNetworkEngine:
                 )
 
                 if not dry_run:
-                    model_info = mlflow.pytorch.log_model(
-                        pytorch_model=model,
-                        name=f"checkpoint_{epoch}",
-                        step=epoch,
-                    )
-
                     mlflow.log_metrics(
                         res,
                         step=epoch,
@@ -351,6 +346,7 @@ class NeuralNetworkEngine:
             if not dry_run:
                 model_info = mlflow.pytorch.log_model(
                     pytorch_model=model,
+                    serialization_format="pickle",
                     name="final_model",
                 )
 
@@ -487,7 +483,8 @@ class NeuralNetworkEngine:
 
         If `dump=True`, the method also exports the recommendations to a CSV file.
 
-        Output structure:
+        Output structure::
+
             {
                 customer_id: {
                     "bought": {
@@ -539,7 +536,8 @@ class NeuralNetworkEngine:
         def normalize_id(x: Any) -> str:
             if isinstance(x, (bytes, bytearray)):
                 x = x.decode("utf-8")
-            return str(x).strip().zfill(10)
+            value = str(x).strip()
+            return value.zfill(10) if value.isdecimal() else value
 
         def normalize_name(x: Any) -> Any:
             if isinstance(x, (bytes, bytearray)):
@@ -624,6 +622,7 @@ class NeuralNetworkEngine:
 
         if dump:
             result_df = pd.DataFrame(rows, columns=["ids_customer", "ids_product", "product_name"])
+            Path(dir).parent.mkdir(parents=True, exist_ok=True)
             result_df.to_csv(path_or_buf=dir, index=False)
 
         if pretty_print:

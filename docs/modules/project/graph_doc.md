@@ -1,56 +1,40 @@
-# Knowledge Graph 
+# Knowledge Graph and pipeline
 
-Il Knowledge Graph aziendale rappresenta il livello di conoscenza centrale dell’architettura sviluppata nel progetto. Il suo scopo è integrare informazioni provenienti da diverse sorgenti aziendali e rappresentarle attraverso entità e relazioni esplicite.
-A differenza del grafo utilizzato dalla Graph Neural Network, costruito principalmente per apprendere i pattern di acquisto, il Knowledge Graph mantiene una visione più completa del dominio aziendale. Al suo interno vengono rappresentati clienti, prodotti, materiali, gerarchie commerciali, venditori e informazioni organizzative.
-Il grafo viene utilizzato soprattutto dall’agente AI, che può recuperare informazioni contestuali e utilizzarle per interpretare e spiegare le raccomandazioni generate dal modello.
+Knowledge Graph is the Neo4j database consulted by Graph RAG. Representation
+customers, products `Level5`, product hierarchy, sales network and geography.
+It is distinguished by the customer graph–product PyTorch Geometric of GNN: in the demo
+both are built from the same synthetic CSVs.
 
+## Scheme implemented
 
-Il Knowledge Graph è stato progettato per:
-- centralizzare dati provenienti da sorgenti eterogenee;
-- rappresentare esplicitamente le relazioni tra le entità aziendali;
-- rendere più semplici le interrogazioni che coinvolgono più livelli informativi;
-- fornire all’agente AI una base di conoscenza strutturata;
-- supportare la generazione di spiegazioni contestualizzate;
-- separare la conoscenza aziendale dalla componente predittiva del recommender system.
-Il Knowledge Graph non sostituisce quindi il modello di raccomandazione, ma lo completa. La GNN individua i prodotti potenzialmente rilevanti, mentre il grafo fornisce le informazioni necessarie per comprenderne il contesto.
+| Entity | Main identifier | Role |
+| --- | --- | --- |
+| `Customer` | `ids_customer` | Customer and commercial attributes |
+| `Level5` | `level5id` | Recommended product/category |
+| `Level1`–`Level4` | `level1id`–`level4id` | Hierarchy of products |
+| `SalesRep` | `ids_salesrep` | Seller and customer assignments |
+| `District`, `Territory`, `MacroRegion` | Organizational identifiers | Commercial structure |
+| `City`, `County`, `Country` | Geographical codes | Location |
+| `Sector`, `Branch`, `Channel`, `MarketSegment`, `Job` | Dimension attributes | Commercial classification |
 
-
-Il Knowledge Graph è implementato in Neo4j seguendo il paradigma del Property Graph.
-Il modello è composto da:
-- nodi, che rappresentano le entità aziendali;
-- relazioni, che descrivono i collegamenti tra le entità;
-- etichette, che identificano il tipo di nodo;
-- proprietà, che contengono gli attributi descrittivi.
-
-Le principali entità rappresentate comprendono:
-- clienti;
-- materiali;
-- prodotti;
-- categorie della gerarchia commerciale;
-- venditori;
-- settori aziendali;
-- aree geografiche;
-Le relazioni permettono, per esempio, di rappresentare che un cliente acquista un materiale, che un materiale appartiene a una determinata categoria di prodotto oppure che un cliente è seguito da uno specifico venditore.
-
-Ontologia aziendale
-La struttura del Knowledge Graph è definita attraverso un’ontologia di dominio, che stabilisce quali entità possono essere rappresentate e quali relazioni possono esistere tra esse.
-L’ontologia costituisce quindi lo schema concettuale del grafo e permette di mantenere una rappresentazione coerente della conoscenza aziendale.
-Una versione semplificata dell’ontologia può essere rappresentata nel seguente modo:
+The demonstrative loader does not create a distinct entity `Material`: products are
+represented `Level5`. The main reports are illustrated below;
+There are also connections `Channel`–`Sector` and `Sector`–`MarketSegment`.
 
 ```{mermaid}
 
 graph LR
 
-    %% Prodotti
-    subgraph Prodotti
+    %% Products
+    subgraph Products
         Level5 -->|BELONGS_TO| Level4
         Level4 -->|BELONGS_TO| Level3
         Level3 -->|BELONGS_TO| Level2
         Level2 -->|BELONGS_TO| Level1
     end
 
-    %% Clienti
-    subgraph Clienti
+    %% Customers
+    subgraph Customers
         Customer -->|IN_SECTOR| Sector
         Customer -->|IN_BRANCH| Branch
         Customer -->|IN_CHANNEL| Channel
@@ -58,8 +42,8 @@ graph LR
         Customer -->|LOCATED_IN| City
     end
 
-    %% Venditori
-    subgraph Venditori
+    %% Sales representatives
+    subgraph Sales representatives
         SalesRep -->|TYPE| Job
         SalesRep -->|IN_CITY| City
         SalesRep -->|IN_CHANNEL| Channel
@@ -71,24 +55,24 @@ graph LR
         SalesRep -->|HAS_CUSTOMER| Customer
     end
 
-    %% Organizzazione vendite
-    subgraph Organizzazione
+    %% Sales organization
+    subgraph Organization
         MacroRegion -->|MANAGED_BY| SalesRep
         Territory -->|MANAGED_BY| SalesRep
         District -->|MANAGED_BY| SalesRep
     end
 
-    %% Geografia
-    subgraph Geografia
+    %% Geography
+    subgraph Geography
         City -->|IN_COUNTY| County
         County -->|IN_COUNTRY| Country
     end
 
-    %% Relazioni prodotti
+    %% Product relationships
     Level5 -->|RECOMMENDED_TO| Customer
     Customer -->|BUYS| Level5
 
-    %% Stili
+    %% Styles
     classDef product fill:#E3F2FD,stroke:#1E88E5,stroke-width:2px,color:#0D47A1;
     classDef customer fill:#E8F5E9,stroke:#43A047,stroke-width:2px,color:#1B5E20;
     classDef sales fill:#FFF3E0,stroke:#FB8C00,stroke-width:2px,color:#E65100;
@@ -104,45 +88,64 @@ graph LR
     class Sector,Channel,MarketSegment shared;
 ```
 
-L’ontologia definisce inoltre le proprietà principali associate alle diverse entità.
-Un cliente può essere descritto attraverso attributi come:
-- identificativo;
-- settore;
-- area geografica;
-- potenziale commerciale;
-- limite di credito.
+`Customer -[:BUYS]-> Level5` describes the purchases.
+`Level5 -[:RECOMMENDED_TO]-> Customer` describes the imported recommendations.
+The absence of a report indicates that the evidence is not available in the graph;
+does not show that a purchase is impossible or that the product is unsuitable.
 
-Un materiale può invece includere:
-- identificativo;
-- descrizione;
-- categoria di appartenenza;
-- posizione nella gerarchia di prodotto.
+## Synthetic data pipeline
 
-Nel progetto viene adottata una rappresentazione orientata al closed-world assumption: il grafo viene considerato una rappresentazione controllata della conoscenza disponibile nei sistemi aziendali. L’assenza di una relazione non viene interpretata come conoscenza incompleta da inferire automaticamente, ma come informazione non presente nel dominio modellato.
-Questa scelta rende il Knowledge Graph più semplice da controllare e più adatto a un contesto aziendale, nel quale le informazioni devono derivare da sorgenti verificate.
+1. `generate_synthetic_database.py` generates 100 customers, 60 products, 30 sellers
+   and 5,453 buying events with a fixed seed.
+2. `load_synthetic_neo4j.py` reads CSVs, creates uniqueness constraints and performs
+   Batch transactions with `MERGE` for knots and relationships.
+3. Repeated purchases of the same pair are aggregated in the report
+   `BUYS`, keeping before/last date, number of events and total quantity.
+4. The loader connects graphics, hierarchies and sellers to customers.
 
+```bash
+make synthetic-data
+make start-neo4j
+make pipeline-synthetic
+```
 
+Loading is designed to be repeated without duplicating the same
+entities and relationships. It is an update for insertion/modification: does not delete
+automatically items disappeared from CSV. The full application on the database
+was not verified live; see the [report](../../verification.md).
 
-La costruzione del grafo segue una pipeline composta da quattro fasi principali:
-Estrazione, durante la quale i dati vengono acquisiti dai sistemi aziendali.
-Trasformazione, che comprende pulizia, normalizzazione, deduplicazione e anonimizzazione.
-Modellazione, nella quale le informazioni vengono convertite in nodi e relazioni secondo l’ontologia.
-Caricamento, attraverso il quale il grafo viene aggiornato all’interno di Neo4j.
-Le principali sorgenti comprendono:
-- anagrafiche clienti;
-- catalogo prodotti;
-- gerarchie commerciali;
-- storico degli acquisti;
-- rete vendita;
-- informazioni geografiche e organizzative.
-L’utilizzo di identificativi univoci consente di evitare la duplicazione delle entità e di mantenere coerenti gli aggiornamenti nel tempo.
+## Network and placeholder recommendations
 
+After the GNN inference, `make pipeline-recommendations` start `ETL_recc.py`.
+The importer seeks existing customers and products and creates/update
+`RECOMMENDED_TO` with the product name. The destination of products is
+`Level5.level5id`, corresponding to `ids_product` in the network CSV.
 
-L’architettura distingue chiaramente il Knowledge Graph dal grafo utilizzato per il recommender system.
-Il Knowledge Graph contiene una rappresentazione estesa del dominio aziendale e viene utilizzato principalmente dall’agente AI.
-Il Recommendation Graph è invece una vista più compatta, composta principalmente da:
-- clienti;
-- prodotti di Level 5;
-- relazioni di acquisto.
-Questa separazione permette alla GNN di lavorare su una struttura ottimizzata per il training, senza introdurre entità e relazioni non direttamente necessarie alla raccomandazione.
+The default path is
+`database/gnn/rec_tables/10/dataset_res_10_features_True.csv`.
+For another output configuration, set `RECOMMENDATIONS_CSV_PATH`.
+IDs must match the already uploaded graphics.
 
+The generator produces separately `recommendations_placeholder.csv`, marked
+`source=placeholder_not_gnn`. It is not a result of the model and it is not imported
+with the standard command. For an explicit proof of the graph:
+
+```bash
+uv run python pipeline/load_synthetic_neo4j.py --include-placeholder-recommendations
+```
+
+The GNN importer does not cancel the previous recommendations and does not remove the
+placeholder attributes. A new import does not replace a
+top-k snapshot: Mix placeholders and real results in
+same database requires explicit management of previous reports.
+
+## Neo4j and private sources
+
+`docker-compose.neo4j.yml` exposes Neo4j and APOC Core with persistent data.
+`NEO4J_URI`, `NEO4J_USERNAME`, `NEO4J_PASSWORD` and `NEO4J_DATABASE` configure the
+client. Doors and startup are described in [operational guide](../getting_started.md).
+
+`ETL_fact.py` preserves the corporate extraction template, with SQL and driver
+Impala to be completed. Report this limitation before you start connections.
+Also the private module `graph_recc_sys.query` and `maisutils` are not included:
+do not serve for the CSV-based demonstration path.

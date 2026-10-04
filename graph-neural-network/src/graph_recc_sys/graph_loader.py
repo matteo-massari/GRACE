@@ -19,11 +19,13 @@ class GraphLoader(DataClass):
     instantiates `LinkNeighborLoader` objects for training and validation.
 
     It also prepares:
+
     - edge label indices for training, validation, and test
     - exclusion links for validation and test, used to filter out already-seen
       interactions from recommendation candidates
 
     The split strategy is temporal:
+
     - training targets come from the earliest interactions
     - validation targets come after training
     - test targets come after validation
@@ -248,7 +250,7 @@ class GraphLoader(DataClass):
 
         return edge_label_index, exclude_links
 
-    def _split(self):
+    def _split(self, sampler="neighbor"):
         """
         Create temporal train/validation/test splits and corresponding loaders.
 
@@ -312,7 +314,16 @@ class GraphLoader(DataClass):
         self.train_edge_label_index = train_subgraph[edge_type].edge_index[:, train_target_index]
         val_edge_label_index = self.data[edge_type].edge_index[:, val_target_index]
 
-        self.train_loader = LinkNeighborLoader(
+        if sampler == "full":
+            from graph_recc_sys.full_graph_loader import FullGraphLinkLoader
+            loader_class = FullGraphLinkLoader
+        else:
+            from torch_geometric.typing import WITH_PYG_LIB
+            if not WITH_PYG_LIB:
+                raise RuntimeError("Il sampler temporale richiede pyg-lib. Per la demo usa --sampler full.")
+            loader_class = LinkNeighborLoader
+
+        self.train_loader = loader_class(
             data=self.train_subgraph,
             num_neighbors=self.num_neighbors,
             edge_label_index=(edge_type, self.train_edge_label_index),
@@ -330,7 +341,7 @@ class GraphLoader(DataClass):
         logging.info(f"Numero di hop: {len(self.num_neighbors)}")
         logging.info(f"test: {next(iter(self.train_loader))}")
 
-        self.val_loader = LinkNeighborLoader(
+        self.val_loader = loader_class(
             data=self.val_subgraph,
             num_neighbors=self.num_neighbors,
             edge_label_index=(edge_type, val_edge_label_index),
@@ -355,7 +366,7 @@ class GraphLoader(DataClass):
             train_context_index, val_target_index, sparse_size, "val"
         )
 
-    def get_loaders(self) -> dict:
+    def get_loaders(self, sampler="neighbor") -> dict:
         """
         Build and return all graph splits, loaders, and evaluation structures.
 
@@ -379,7 +390,7 @@ class GraphLoader(DataClass):
                 - `val_exclude_links`: validation exclusion links
         """
         self._eval_memory()
-        self._split()
+        self._split(sampler=sampler)
         return {
             "train_subgraph": self.train_subgraph,
             "train_loader": self.train_loader,

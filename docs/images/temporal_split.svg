@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Temporal data split for a graph neural network</title>
+  <desc id="desc">Three snapshots of a bipartite graph and a timeline split into training, validation, and test.</desc>
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="7" stdDeviation="10" flood-color="#172033" flood-opacity="0.10"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#52627a"/>
+    </marker>
+    <style>
+      .title { font: 700 34px Arial, Helvetica, sans-serif; fill: #172033; letter-spacing: .2px; }
+      .label { font: 700 22px Arial, Helvetica, sans-serif; fill: #172033; }
+      .small { font: 500 18px Arial, Helvetica, sans-serif; fill: #52627a; }
+      .segment { font: 700 21px Arial, Helvetica, sans-serif; fill: #172033; }
+      .edge { stroke: #26364d; stroke-width: 4; stroke-linecap: round; fill: none; }
+      .new1 { stroke: #cf7b45; stroke-width: 4; stroke-linecap: round; fill: none; }
+      .new2 { stroke: #579367; stroke-width: 4; stroke-linecap: round; fill: none; }
+      .node-a { fill: #ffffff; stroke: #7348b7; stroke-width: 5; }
+      .node-b { fill: #ffffff; stroke: #df6a42; stroke-width: 5; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="900" fill="#ffffff"/>
+  <text x="100" y="100" class="title">Temporal data split</text>
+  <line x1="100" y1="125" x2="1500" y2="125" stroke="#dfe5ec" stroke-width="2"/>
+
+  <!-- Snapshot cards -->
+  <g filter="url(#shadow)">
+    <rect x="100" y="190" width="380" height="370" rx="20" fill="#ffffff" stroke="#dfe5ec" stroke-width="2"/>
+    <rect x="610" y="190" width="380" height="370" rx="20" fill="#ffffff" stroke="#dfe5ec" stroke-width="2"/>
+    <rect x="1120" y="190" width="380" height="370" rx="20" fill="#ffffff" stroke="#dfe5ec" stroke-width="2"/>
+  </g>
+
+  <text x="290" y="240" text-anchor="middle" class="label">Gₜ₋₂</text>
+  <text x="800" y="240" text-anchor="middle" class="label">Gₜ₋₁</text>
+  <text x="1310" y="240" text-anchor="middle" class="label">Gₜ</text>
+  <line x1="493" y1="375" x2="594" y2="375" stroke="#52627a" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="1003" y1="375" x2="1104" y2="375" stroke="#52627a" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- G t-2 -->
+  <g>
+    <path class="edge" d="M188 302 L385 342 M188 375 L385 342 M188 375 L385 420 M188 448 L385 420 M188 448 L385 498"/>
+    <circle class="node-a" cx="180" cy="302" r="19"/><circle class="node-a" cx="180" cy="375" r="19"/><circle class="node-a" cx="180" cy="448" r="19"/>
+    <circle class="node-b" cx="395" cy="342" r="19"/><circle class="node-b" cx="395" cy="420" r="19"/><circle class="node-b" cx="395" cy="498" r="19"/>
+  </g>
+
+  <!-- G t-1 -->
+  <g>
+    <path class="edge" d="M698 302 L895 342 M698 375 L895 342 M698 375 L895 420 M698 448 L895 420 M698 448 L895 498"/>
+    <path class="new1" d="M698 302 L895 420 M698 448 L895 342"/>
+    <circle class="node-a" cx="690" cy="302" r="19"/><circle class="node-a" cx="690" cy="375" r="19"/><circle class="node-a" cx="690" cy="448" r="19"/>
+    <circle class="node-b" cx="905" cy="342" r="19"/><circle class="node-b" cx="905" cy="420" r="19"/><circle class="node-b" cx="905" cy="498" r="19"/>
+  </g>
+
+  <!-- G t -->
+  <g>
+    <path class="edge" d="M1208 302 L1405 342 M1208 302 L1405 420 M1208 375 L1405 342 M1208 375 L1405 420 M1208 448 L1405 342 M1208 448 L1405 420 M1208 448 L1405 498"/>
+    <path class="new2" d="M1208 375 L1405 498"/>
+    <circle class="node-a" cx="1200" cy="302" r="19"/><circle class="node-a" cx="1200" cy="375" r="19"/><circle class="node-a" cx="1200" cy="448" r="19"/>
+    <circle class="node-b" cx="1415" cy="342" r="19"/><circle class="node-b" cx="1415" cy="420" r="19"/><circle class="node-b" cx="1415" cy="498" r="19"/>
+  </g>
+
+  <!-- Timeline -->
+  <text x="100" y="655" class="label">Time</text>
+  <line x1="100" y1="690" x2="1500" y2="690" stroke="#172033" stroke-width="4" marker-end="url(#arrow)"/>
+  <rect x="100" y="668" width="840" height="44" rx="7" fill="#e7ddf6"/>
+  <rect x="940" y="668" width="280" height="44" fill="#f8e2d8"/>
+  <rect x="1220" y="668" width="280" height="44" rx="7" fill="#dceee1"/>
+  <line x1="940" y1="650" x2="940" y2="730" stroke="#ffffff" stroke-width="3"/>
+  <line x1="1220" y1="650" x2="1220" y2="730" stroke="#ffffff" stroke-width="3"/>
+  <text x="520" y="698" text-anchor="middle" class="segment">Training</text>
+  <text x="1080" y="698" text-anchor="middle" class="segment">Validation</text>
+  <text x="1360" y="698" text-anchor="middle" class="segment">Test</text>
+  <text x="100" y="765" class="small">January</text>
+  <text x="940" y="765" text-anchor="middle" class="small">September</text>
+  <text x="1220" y="765" text-anchor="middle" class="small">November</text>
+  <text x="1500" y="765" text-anchor="end" class="small">December</text>
+</svg>

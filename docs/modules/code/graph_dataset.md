@@ -2,5 +2,5 @@
 
 ```{automodule} graph_recc_sys.graph_dataset
 :members:
-:show-inheritance: 
+:show-inheritance:
 ```

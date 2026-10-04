@@ -1,1 +1,0 @@
-# Storico dell'agente

@@ -44,14 +44,6 @@ graph\_recc\_sys.neural\_network module
    :show-inheritance:
    :undoc-members:
 
-graph\_recc\_sys.query module
------------------------------
-
-.. automodule:: graph_recc_sys.query
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
 Module contents
 ---------------
 

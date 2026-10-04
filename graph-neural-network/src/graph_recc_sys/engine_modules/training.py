@@ -1,11 +1,11 @@
 import torch
 import torch.nn
+from graph_recc_sys.utils.config import DataClass
+from graph_recc_sys.utils.device import autocast_dtype
 from torch import autocast
 from torch_geometric.data import HeteroData
 from torch_geometric.loader import LinkNeighborLoader
 from tqdm import tqdm
-
-from graph_recc_sys.utils.config import DataClass
 
 
 class Training(DataClass):
@@ -117,7 +117,11 @@ class Training(DataClass):
 
             optimizer.zero_grad()
 
-            with autocast(device_type=device.type, dtype=torch.bfloat16):
+            with autocast(
+                device_type=device.type,
+                dtype=autocast_dtype(device) if device.type == "cuda" else torch.float32,
+                enabled=device.type == "cuda",
+            ):
                 logits = model(sampled_data)
                 loss = self.loss_fn(logits, labels)
 
@@ -266,7 +270,11 @@ class Training(DataClass):
 
             optimizer.zero_grad()
 
-            with autocast(device_type=device.type, dtype=torch.bfloat16):
+            with autocast(
+                device_type=device.type,
+                dtype=autocast_dtype(device) if device.type == "cuda" else torch.float32,
+                enabled=device.type == "cuda",
+            ):
                 z_dict = model(sampled_data)
 
                 anchor, positive, negative = self._get_triplets(z_dict, sampled_data)

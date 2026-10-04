@@ -4,19 +4,17 @@ from pathlib import Path
 from typing import Any
 
 from dotenv import load_dotenv
-from impala.util import as_pandas
-from maisutils.impala_utils import close_impyla_conn, open_impyla_conn
 
-from graph_recc_sys.query import (
-    _query_bestseller,
-    _query_customer,
-    _query_customer_analysis,
-    _query_market_basket,
-    _query_product,
-    _query_product_analysis,
-    _query_product_names,
-    _query_rec_engine,
-)
+def _external_query(name, *args):
+    try:
+        from graph_recc_sys import query
+    except ImportError as exc:
+        raise RuntimeError(
+            "CSV locale mancante. Esegui make synthetic-data e imposta DATA_PATH=database/gnn. "
+            "Impala extraction requires the private graph_recc_sys.query module."
+        ) from exc
+    return getattr(query, name)(*args)
+
 
 load_dotenv()
 
@@ -30,7 +28,7 @@ class DatasetManager:
     the provided hyperparameters, while analysis tables are downloaded through
     a separate flow.
 
-    Expected directory structure:
+    Expected directory structure::
 
         DATA_PATH/
         ├── training_tables/
@@ -71,13 +69,13 @@ class DatasetManager:
         hyperparams (Any):
             Hyperparameter/configuration object passed at initialization.
 
-        n_clienti (int | None):
+        n_customers (int | None):
             Number of clients used to define the dataset.
-        n_minimo_connessioni (int | None):
+        min_connections (int | None):
             Minimum number of interactions/connections required.
         k (int | None):
             Top-k cutoff used for recommendation tables.
-        n_mesi (int | None):
+        n_months (int | None):
             Number of months used to filter the dataset.
 
         dataset_dir (Path):
@@ -122,10 +120,10 @@ class DatasetManager:
         Args:
             hyperparams (Any | None):
                 Configuration object containing:
-                - `n_clienti`
-                - `n_connessioni_minime`
+                - `n_customers`
+                - `min_connections`
                 - `k`
-                - `n_mesi`
+                - `n_months`
                 - `add_features`
         """
         self.base_data_path: Path = Path(os.getenv("DATA_PATH", "."))
@@ -136,13 +134,13 @@ class DatasetManager:
 
         if hyperparams is not None:
             self.hyperparams: Any = hyperparams
-            self.n_clienti: int = hyperparams.n_clienti
-            self.n_minimo_connessioni: int = hyperparams.n_connessioni_minime
+            self.n_customers: int = hyperparams.n_customers
+            self.min_connections: int = hyperparams.min_connections
             self.k: int = hyperparams.k
-            self.n_mesi: int = hyperparams.n_mesi
+            self.n_months: int = hyperparams.n_months
 
             self.dataset_dir: Path = (
-                self.training_base_dir / f"dataset_{self.n_clienti}_{self.n_minimo_connessioni}_{self.n_mesi}"
+                self.training_base_dir / f"dataset_{self.n_customers}_{self.min_connections}_{self.n_months}"
             )
             self.graph_dir: Path = self.dataset_dir / "graph_data"
             self.market_basket_path: Path = self.dataset_dir / "basket_data.csv"
@@ -158,24 +156,24 @@ class DatasetManager:
             )
 
         else:
-            self.n_clienti: int | None = None
-            self.n_minimo_connessioni: int | None = None
+            self.n_customers: int | None = None
+            self.min_connections: int | None = None
             self.k: int | None = None
-            self.n_mesi: int | None = None
+            self.n_months: int | None = None
 
     def _init_analysis_paths(self) -> None:
         """
         Initialize the paths used to store analysis tables.
 
         This method uses the current values of:
-        - `self.n_clienti`
-        - `self.n_minimo_connessioni`
-        - `self.n_mesi`
+        - `self.n_customers`
+        - `self.min_connections`
+        - `self.n_months`
 
         and builds the corresponding analysis directory structure.
         """
         self.analysis_dir: Path = (
-            self.analysis_base_dir / f"dataset_{self.n_clienti}_{self.n_minimo_connessioni}_{self.n_mesi}"
+            self.analysis_base_dir / f"dataset_{self.n_customers}_{self.min_connections}_{self.n_months}"
         )
         self.analysis_basket_path: Path = self.analysis_dir / "basket_data.csv"
         self.analysis_product_path: Path = self.analysis_dir / "product.csv"
@@ -194,6 +192,9 @@ class DatasetManager:
                 Destination path where the resulting CSV will be written.
         """
         output_path.parent.mkdir(parents=True, exist_ok=True)
+
+        from impala.util import as_pandas
+        from maisutils.impala_utils import close_impyla_conn, open_impyla_conn
 
         connection, cursor = open_impyla_conn()
         try:
@@ -224,24 +225,24 @@ class DatasetManager:
 
         if not self.market_basket_path.exists():
             self._fetch(
-                _query_market_basket(self.n_clienti, self.n_minimo_connessioni, self.n_mesi),
+                _external_query("_query_market_basket", self.n_customers, self.min_connections, self.n_months),
                 self.market_basket_path,
             )
 
         if not self.product_desc_path.exists():
             self._fetch(
-                _query_product(self.n_clienti, self.n_minimo_connessioni, self.n_mesi),
+                _external_query("_query_product", self.n_customers, self.min_connections, self.n_months),
                 self.product_desc_path,
             )
 
         if not self.customer_desc_path.exists():
             self._fetch(
-                _query_customer(self.n_clienti, self.n_minimo_connessioni, self.n_mesi),
+                _external_query("_query_customer", self.n_customers, self.min_connections, self.n_months),
                 self.customer_desc_path,
             )
 
         if not self.product_names_path.exists():
-            self._fetch(_query_product_names(), self.product_names_path)
+            self._fetch(_external_query("_query_product_names", ), self.product_names_path)
 
         return str(self.dataset_dir)
 
@@ -272,18 +273,18 @@ class DatasetManager:
         self.rec_table_dir.mkdir(parents=True, exist_ok=True)
 
         if not self.rec_engine_path.exists():
-            self._fetch(_query_rec_engine(self.k), self.rec_engine_path)
+            self._fetch(_external_query("_query_rec_engine", self.k), self.rec_engine_path)
 
         if not self.rec_bestseller_path.exists():
-            self._fetch(_query_bestseller(self.k), self.rec_bestseller_path)
+            self._fetch(_external_query("_query_bestseller", self.k), self.rec_bestseller_path)
 
         return str(self.rec_engine_path), str(self.rec_bestseller_path)
 
     def download_analysis_table(
         self,
-        n_clienti: int,
-        n_connessioni_minime: int,
-        n_mesi: int,
+        n_customers: int,
+        min_connections: int,
+        n_months: int,
     ) -> str:
         """
         Download the enriched tables used for analysis.
@@ -296,39 +297,39 @@ class DatasetManager:
         dataset configuration stored in the instance.
 
         Args:
-            n_clienti (int):
+            n_customers (int):
                 Number of clients to include.
-            n_connessioni_minime (int):
+            min_connections (int):
                 Minimum number of interactions/connections required.
-            n_mesi (int):
+            n_months (int):
                 Number of months to include.
 
         Returns:
             str:
                 Path to the analysis directory as a string.
         """
-        self.n_clienti = n_clienti
-        self.n_minimo_connessioni = n_connessioni_minime
-        self.n_mesi = n_mesi
+        self.n_customers = n_customers
+        self.min_connections = min_connections
+        self.n_months = n_months
 
         self._init_analysis_paths()
         self.analysis_dir.mkdir(parents=True, exist_ok=True)
 
         if not self.analysis_basket_path.exists():
             self._fetch(
-                _query_market_basket(self.n_clienti, self.n_minimo_connessioni, self.n_mesi),
+                _external_query("_query_market_basket", self.n_customers, self.min_connections, self.n_months),
                 self.analysis_basket_path,
             )
 
         if not self.analysis_product_path.exists():
             self._fetch(
-                _query_product_analysis(self.n_clienti, self.n_minimo_connessioni, self.n_mesi),
+                _external_query("_query_product_analysis", self.n_customers, self.min_connections, self.n_months),
                 self.analysis_product_path,
             )
 
         if not self.analysis_customer_path.exists():
             self._fetch(
-                _query_customer_analysis(self.n_clienti, self.n_minimo_connessioni, self.n_mesi),
+                _external_query("_query_customer_analysis", self.n_customers, self.min_connections, self.n_months),
                 self.analysis_customer_path,
             )
 

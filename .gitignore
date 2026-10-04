@@ -51,3 +51,14 @@ Thumbs.db
 
 # Excluded file
 notes/
+
+# Regenerable datasets and local training outputs
+/database/**/*.csv
+/database/**/processed/
+/database/**/graph_data/
+/artifacts/
+/artifact_store/
+*.log
+
+# Local DuckDB session state
+:memory:.ses

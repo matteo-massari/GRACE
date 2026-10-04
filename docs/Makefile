@@ -6,14 +6,14 @@ SPHINXAUTOBUILD ?= sphinx-autobuild
 SOURCEDIR     = .
 BUILDDIR      = _build
 PORT          ?= 8000
-PACKAGE_DIR   = ../src/graph_recc_sys
+PACKAGE_DIR   = ../graph-neural-network/src/graph_recc_sys
 APIDOC_OUT    = modules
 
 .PHONY: help clean html rebuild serve apidoc open check live full
 
 help:
 	@echo "Available targets:"
-	@echo "  make html      - Build HTML documentation"
+	@echo "  make html      - Build both documentation languages"
 	@echo "  make clean     - Remove build artifacts"
 	@echo "  make rebuild   - Clean and rebuild HTML documentation"
 	@echo "  make serve     - Serve HTML documentation locally on port $(PORT)"
@@ -25,6 +25,7 @@ help:
 
 html:
 	@$(SPHINXBUILD) -b html "$(SOURCEDIR)" "$(BUILDDIR)/html" $(SPHINXOPTS)
+	@$(SPHINXBUILD) -b html "$(SOURCEDIR)/it" "$(BUILDDIR)/html/it" $(SPHINXOPTS)
 
 clean:
 	rm -rf "$(BUILDDIR)"
@@ -42,8 +43,9 @@ open:
 
 check:
 	@$(SPHINXBUILD) -b html -n -W "$(SOURCEDIR)" "$(BUILDDIR)/html" $(SPHINXOPTS)
+	@$(SPHINXBUILD) -b html "$(SOURCEDIR)/it" "$(BUILDDIR)/html/it" $(SPHINXOPTS)
 
-live:
+live: html
 	@$(SPHINXAUTOBUILD) \
 		--port $(PORT) \
 		"$(SOURCEDIR)" "$(BUILDDIR)/html"

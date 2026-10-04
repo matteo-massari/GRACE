@@ -1,78 +1,56 @@
-# Architettura del Progetto
+# The three components
+
+The project distinguishes three responsibilities. Persistent services are Neo4j and
+MLflow, each with a Compose; pipeline, training and agent are Python programs
+Start when you need them.
+
+| Component | Input | Responsibility | Output |
+| --- | --- | --- | --- |
+| Knowledge Graph and pipeline | CSV of customers, products, sellers and purchases | Build and update your business domain in Neo4j | Nodes, relationships, and recommendations |
+| GNN | CSV in format `DATA_PATH/training_tables/` | Build the customer graph–product, train and evaluate GraphSAGE | Models/metrics in MLflow and CSV of recommendations |
+| Graph RAG | Question, Neo4j schema and Cypher results | Recover evidence from the graph and formulate an answer | Text reply in the user’s language (English by default) |
+
+## Flow implemented
+
+```{mermaid}
+flowchart TD
+    D["CSV data"] --> P["Pipeline Neo4j"]
+    P --> K["Knowledge Graph / Neo4j"]
+    D --> G["PyG graph and GNN training"]
+    G --> M["MLflow: models and metrics"]
+    M --> I["GNN inference"]
+    D --> I
+    I --> C["Recommendation CSV"]
+    C --> R["Import recommendations"]
+    R --> K
+    U["User question"] --> A["Graph RAG + LLM"]
+    A -->|Cypher| K
+    K -->|Results| A
+    A --> O["Evidence-based answer"]
+```
+
+The GNN **reads CSV files**. The agent **reads recommendations imported into Neo4j**;
+it does not invoke the GNN or access MLflow.
+Synthetic data generation feeds both paths with the same
+customer base and products.
+
+## Execution
+
+- `docker-compose.neo4j.yml`: database and APOC Core; start with `make start-neo4j`.
+- `docker-compose.mlflow.yml`: tracking, SQLite and artifact; start with `make start-mlflow`.
+- `make pipeline-synthetic`: Loading synthetic data in Knowledge Graph.
+- `make train` / `make infer`: training and inference of GNN.
+- `make pipeline-recommendations`: import of export GNN to Neo4j.
+- `make agent ARGS="..."`: a question to the terminal agent.
+
+The demo `make smoke-train` check the network without external services. The guide
+operational describes the[full start](getting_started.md), including credentials and
+passing the MLflow run to inference.
 
 ```{toctree}
 :maxdepth: 1
 
-Knowledge Graph <project/graph_doc>
-Architettura della rete <project/rete>
-Sales Agent <project/agent_doc>
-
+Knowledge Graph and pipeline <project/graph_doc>
+Neural Network GNN <project/network>
+Graph RAG <project/agent_doc>
 ```
-
-
-Il progetto è costituito da tre componenti principali che collaborano tra loro per fornire un sistema di raccomandazione intelligente e spiegabile:
-
-
-
-L'obiettivo è combinare la capacità di apprendere dai dati della GNN con la conoscenza strutturata presente nel grafo e le capacità di ragionamento di un agente basato su Large Language Model.
-
-
-**Neo4j**
-Neo4j rappresenta il punto centrale della conoscenza aziendale.
-Al suo interno vengono memorizzate le informazioni relative a clienti, prodotti e relazioni tra le diverse entità, creando un grafo che descrive il dominio aziendale in maniera naturale.
-
-Questa componente permette di:
-- centralizzare la conoscenza;
-- rappresentare relazioni complesse tra le entità;
-- fornire il contesto necessario sia alla GNN sia all'agente AI.
-
-Neo4j non è solamente un database, ma costituisce la base di conoscenza dell'intero sistema.
-
-
-**Graph Neural Network (GNN)**
-La GNN rappresenta il motore di raccomandazione.
-Utilizzando il grafo delle interazioni tra clienti e prodotti, il modello apprende automaticamente i pattern di acquisto e le relazioni latenti presenti nei dati.
-Il suo compito è produrre una lista di prodotti consigliati per ciascun cliente, sfruttando la struttura del grafo anziché considerare solamente le informazioni tabellari tradizionali.
-L'output della GNN consiste quindi nelle raccomandazioni candidate che verranno successivamente interpretate dall'agente AI.
-
-
-**Agente AI**
-L'agente AI costituisce il livello di interazione con l'utente.
-Riceve le richieste formulate in linguaggio naturale e coordina l'utilizzo delle altre componenti del sistema.
-In particolare, può:
-- interrogare Neo4j per recuperare informazioni contestuali;
-- utilizzare le raccomandazioni prodotte dalla GNN;
-- combinare le informazioni disponibili per costruire una risposta comprensibile e motivata.
-
-L'obiettivo dell'agente non è solamente mostrare una raccomandazione, ma contestualizzarla e renderla facilmente interpretabile dall'utente finale.
-
-
-**Flusso**
-
-```text
-                +----------------+
-                |     Neo4j      |
-                | Knowledge Graph|
-                +-------+--------+
-                        |
-                        |
-         +--------------+--------------+
-         |                             |
-         |                             |
-+--------v--------+            +-------v--------+
-|      GNN        |            |    Agente AI   |
-| Recommendation  |----------->| Ragionamento   |
-|      Engine     |            | e Interazione  |
-+-----------------+            +----------------+
-                                       |
-                                       |
-                                 Risposta finale
-```
-
-
-L'architettura è progettata secondo una logica modulare, nella quale ogni componente svolge un ruolo ben definito:
-- **Neo4j** rappresenta la conoscenza.
-- **La GNN** apprende dai dati e genera le raccomandazioni.
-- **L'agente AI** coordina le informazioni disponibili e produce una risposta interpretabile per l'utente.
-
-Questa separazione delle responsabilità rende il sistema facilmente estendibile, consentendo l'evoluzione indipendente delle singole componenti senza modificare l'intera architettura.

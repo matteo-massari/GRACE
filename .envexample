@@ -1,40 +1,33 @@
-# Configurazione condivisa del progetto.
+# Shared project configuration.
 
-# Neo4j (usato da graph-rag-agent e pipeline)
+# Neo4j (used by graph-rag-agent and pipeline)
 NEO4J_URI=bolt://localhost:7687
 NEO4J_USERNAME=neo4j
 NEO4J_PASSWORD=change-me
 NEO4J_DATABASE=neo4j
+# If you change NEO4J_BOLT_PORT, also update NEO4J_URI.
+NEO4J_HTTP_PORT=7474
+NEO4J_BOLT_PORT=7687
 
-# Graph RAG agent
+# Graph RAG agent (CLI). Reserved ports: these do not start a web server.
 AGENT_SERVER_PORT=8000
 CHAINLIT_CLIENT_PORT=3546
 # AZURE_OPENAI_API_KEY=
 # AZURE_OPENAI_ENDPOINT=
 # GOOGLE_API_KEY=
 
-# Per utilizzare un'istanza di MLflow in locale, definire le seguenti variabili
-# per graph-neural-network:
-# - MLFLOW_BACKEND_URI: backend store dei metadati MLflow
-# - MLFLOW_ARTIFACT_ROOT: directory dove salvare gli artifact
-# - MLFLOW_HOST: host su cui esporre il server MLflow
-# - MLFLOW_PORT: porta del server MLflow
-
-MLFLOW_BACKEND_URI=sqlite:////path/mlflow.db
-MLFLOW_ARTIFACT_ROOT=file:///path/artifacts
-MLFLOW_HOST=0.0.0.0
+# MLflow in Docker: database and artifacts are stored in the mlflow_data volume.
+# MLFLOW_PORT is the host port; the container always uses port 5000.
 MLFLOW_PORT=1234
+MLFLOW_TRACKING_URI=http://127.0.0.1:1234
+MLFLOW_EXPERIMENT=graph-recommendation-demo
 
-# Se l'istanza e' locale:
-MLFLOW_TRACKING_URI=http://0.0.0.0:1234
-MLFLOW_EXPERIMENT=Nome Esperimento
-
-# Se l'istanza non e' locale:
-# MLFLOW_EXPERIMENT=progetto
-# MLFLOW_TRACKING_USERNAME=esperimento
+# For a remote instance:
+# MLFLOW_EXPERIMENT=project
+# MLFLOW_TRACKING_USERNAME=experiment
 # MLFLOW_TRACKING_PASSWORD=password
-# MLFLOW_TRACKING_URI=https://istanza-mlflow
+# MLFLOW_TRACKING_URI=https://mlflow-instance
 # MLFLOW_TRACKING_INSECURE_TLS=true
 
-# Indicare dove si trovano i dati
-DATA_PATH=/path
+# Path to the data
+DATA_PATH=database/gnn

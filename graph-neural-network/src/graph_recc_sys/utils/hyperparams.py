@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Literal
 
 import yaml
@@ -65,11 +66,11 @@ class HyperParams:
         aggr (Literal["mean", "max"]):
             Aggregation strategy used in graph convolutions.
 
-        n_clienti (int | None):
+        n_customers (int | None):
             Number of customers used for dataset extraction.
-        n_mesi (int):
+        n_months (int):
             Number of months used to define the data window.
-        n_connessioni_minime (int):
+        min_connections (int):
             Minimum number of interactions required per customer/entity.
 
         n_batch (int):
@@ -110,9 +111,9 @@ class HyperParams:
     num_stochastic_item_features: int
     num_stochastic_user_features: int
     aggr: Literal["mean", "max"]
-    n_clienti: int | None
-    n_mesi: int
-    n_connessioni_minime: int
+    n_customers: int | None
+    n_months: int
+    min_connections: int
     n_batch: int
     n_hop: int
     n_sample_at_node: int
@@ -122,7 +123,7 @@ class HyperParams:
     gpu: int
 
     @classmethod
-    def from_yaml(cls, config_path: str = "interface.yaml") -> "HyperParams":
+    def from_yaml(cls, config_path: str | Path | None = None) -> "HyperParams":
         """
         Build a `HyperParams` instance from a YAML configuration file.
 
@@ -144,8 +145,21 @@ class HyperParams:
             HyperParams:
                 Instantiated hyperparameter object.
         """
+        config_path = config_path or Path(__file__).resolve().parents[3] / "interface.yaml"
         with open(config_path, encoding="utf-8") as f:
             data = yaml.safe_load(f)["hyperparameters"]
+
+        # Accept existing configurations while documenting English names only.
+        aliases = {
+            "n_clienti": "n_customers",
+            "n_mesi": "n_months",
+            "n_connessioni_minime": "min_connections",
+        }
+        for old, new in aliases.items():
+            if old in data["graph"]:
+                if new in data["graph"]:
+                    raise ValueError(f"Conflicting graph settings: {old} and {new}")
+                data["graph"][new] = data["graph"].pop(old)
 
         return cls(
             **data["training"],

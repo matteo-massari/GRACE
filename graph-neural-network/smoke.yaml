@@ -1,0 +1,48 @@
+hyperparameters:
+  training:
+    lr: 0.00001
+    eta_min: 0.000001
+    warmup_period: 3 # KEEP FIXED
+    n_epochs: 3 # KEEP FIXED (typical training time: 1 hour)
+    margin: 0.4
+    gpu: 0
+
+  model:
+    n_conv_layer: 2
+    n_projs_layer: Null  # Null applies a single final reduction layer
+    loss_function: TripletMarginLoss # "TripletMarginLoss", "BPRLoss", "InfoNCE", "BCEWithLogitsLoss", "FocalLoss"
+    conv_type: GraphSage # GraphSage
+    input_channels: 32
+    hidden_channels: 16
+    out_channels: 8
+    dropout_rate: 0.2
+    linear_init: False # Disabled
+    conv_init: False   # Disabled
+    two_tower: False
+    proj_norm: Null # Null / LayerNorm / BatchNorm
+    aggr: "mean" # max / mean / lstm
+    add_features: True
+    num_stochastic_item_features: 1
+    num_stochastic_user_features: 0
+
+  graph:
+    n_customers: Null # Null uses the entire dataset; otherwise specify the customer count
+    n_months: 12
+    min_connections: 4
+
+  loader:
+    n_batch: 128 # KEEP FIXED
+    n_hop: 2 # KEEP FIXED
+    n_sample_at_node: 25 # KEEP FIXED
+    mode: "triplet" # Literal["binary", "triplet"]
+
+
+  eval:
+    similarity: "euclidean" # euclidean / cosine
+    k: 10
+
+settings:
+  mlflow:
+    experiment_name: "graph neural network"
+    run_id: ""
+    model_name: "checkpoint_40"

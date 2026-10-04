@@ -1,3 +1,4 @@
+from impala.util import as_pandas
 from neo4j import GraphDatabase
 from dotenv import load_dotenv
 
@@ -12,11 +13,15 @@ from config import config
 load_dotenv()
 
 # Note:
-# Per una questione di trade-off tra difficoltà di gestione della connessione e controllo sulle prestazioni
-# Usiamo le managed transaction. Così gestiamo le sessioni per mandare i dati in batch ma facciamo gestire
-# per ora la parte di retry, rollback e commit di una transazione.
-# City e city name se normalizzati possono essere sovrapposti
-# Il passaggio di dati è traslato di due mesi,
+# Managed transactions balance connection management and performance.
+# Sessions send batches while the driver handles retries, rollback, and commit.
+# The data window is shifted by two months.
+
+# This file preserves the original enterprise ETL template.
+# Complete the SQL and connection before enabling it; use load_synthetic_neo4j.py for the demo.
+raise NotImplementedError(
+    "Configure the Impala ETL: queries and driver are not included. Use make pipeline-synthetic for the demo."
+)
 
 # Driver
 ## Neo4j
@@ -26,20 +31,20 @@ database = os.getenv("NEO4J_DATABASE")
 ## Impala
 connection, cursor = "DA AGGIUNGERE UN DRIVER"
 
-## Parametri
+## Parameters
 N_CLIENTI = None
-N_MINIMO_CONNESSIONI = 4 
+N_MINIMO_CONNESSIONI = 4
 N_MESI = 12
 
 
 # ============================================================
-# ESTRAZIONI SQL
+# SQL EXTRACTION
 # ============================================================
 
 
 def _base_filter_query(n_clienti, n_minimo_connessioni, n_mesi):
     """
-    Query d'estrazione base, rappresenta il primo filtro applicato poi alle dimensionali.
+    Base extraction query, providing the initial filter for dimension tables.
     """
     limit_clause = "" if n_clienti is None else f"LIMIT {n_clienti}"
 
@@ -69,7 +74,7 @@ def _query_product(n_clienti, n_minimo_connessioni, n_mesi):
     """
 
 
-# Tabelle dei fatti
+# Fact tables
 def _query_customer_salesrep(n_clienti, n_minimo_connessioni, n_mesi):
     return f"""
     {_base_filter_query(n_clienti, n_minimo_connessioni, n_mesi)}
@@ -85,7 +90,7 @@ def _query_customer_product(n_clienti, n_minimo_connessioni, n_mesi):
 
 
 # ============================================================
-# TRASFORMAZIONI
+# TRANSFORMATIONS
 # ============================================================
 
 
@@ -257,8 +262,8 @@ def extract_and_transform(cursor, query: str, transform_fn) -> List[Dict[str, An
     return records
 
 
-# Estrazione
-print("Estrazione dati da Impala...")
+# Extraction
+print("Extracting data from Impala...")
 customer_records = extract_and_transform(
     cursor, _query_customer(N_CLIENTI, N_MINIMO_CONNESSIONI, N_MESI), transform_customer
 )
@@ -299,7 +304,7 @@ def chunked(data: List[Dict[str, Any]], size: int):
         yield data[i : i + size]
 
 
-# Vincoli
+# Constraints
 constraints = [
     "CREATE CONSTRAINT customer_id IF NOT EXISTS FOR (n:Customer) REQUIRE n.ids_customer IS UNIQUE",
     "CREATE CONSTRAINT sector_id IF NOT EXISTS FOR (n:Sector) REQUIRE n.att_sector IS UNIQUE",
@@ -322,12 +327,12 @@ constraints = [
 ]
 
 with driver.session(database=database) as session:
-    for q in tqdm(constraints, desc="Vincoli"):
+    for q in tqdm(constraints, desc="Constraints"):
         session.run(q)
 
 
 # ============================================================
-# NODI
+# NODES
 # ============================================================
 
 
@@ -585,7 +590,7 @@ with driver.session(database=database) as session:
 
 
 # ============================================================
-# CONNESSIONI
+# RELATIONSHIPS
 # ============================================================
 
 
@@ -1057,6 +1062,7 @@ with driver.session(database=database) as session:
 # ============================================================
 # CHIUSURA
 # ============================================================
-close_impyla_conn(connection, cursor)
+cursor.close()
+connection.close()
 driver.close()
 print("Done! Grafo caricato con successo.")

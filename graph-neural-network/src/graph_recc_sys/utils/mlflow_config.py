@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 from contextlib import contextmanager
 from typing import Any, Iterator
 
@@ -26,7 +27,7 @@ class MlflowConfig:
     - `MLFLOW_TRACKING_URI`
     - `MLFLOW_EXPERIMENT`
     - `MLFLOW_TRACKING_USERNAME`
-    - `MLFLOW_TRACKING_PASSWORDTEST_MLFLOW`
+    - `MLFLOW_TRACKING_PASSWORD`
 
     Attributes:
         tracking_uri (str | None):
@@ -46,7 +47,7 @@ class MlflowConfig:
         self.tracking_uri: str | None = os.getenv("MLFLOW_TRACKING_URI")
         self.name_experiment: str | None = os.getenv("MLFLOW_EXPERIMENT")
         self.username: str | None = os.getenv("MLFLOW_TRACKING_USERNAME")
-        self.password: str | None = os.getenv("MLFLOW_TRACKING_PASSWORDTEST_MLFLOW")
+        self.password: str | None = os.getenv("MLFLOW_TRACKING_PASSWORD")
 
     @property
     def _apply_auth(self) -> None:
@@ -61,7 +62,7 @@ class MlflowConfig:
         if self.password:
             os.environ["MLFLOW_TRACKING_PASSWORD"] = self.password
 
-    def _get_run(self, config_path: str = "interface.yaml") -> tuple[str, str]:
+    def _get_run(self, config_path: str | Path | None = None) -> tuple[str, str]:
         """
         Read the target run id and model name from a YAML configuration file.
 
@@ -82,6 +83,7 @@ class MlflowConfig:
                 - `run_id`
                 - `model_name`
         """
+        config_path = config_path or Path(__file__).resolve().parents[3] / "interface.yaml"
         with open(config_path, encoding="utf-8") as f:
             interface = yaml.safe_load(f)
             mlflow_settings = interface["settings"]["mlflow"]
@@ -100,7 +102,7 @@ class MlflowConfig:
         mlflow.set_tracking_uri(self.tracking_uri)
         mlflow.set_experiment(self.name_experiment)
 
-    def get_model(self, device: Any, config_path: str = "interface.yaml") -> Any:
+    def get_model(self, device: Any, config_path: str | Path | None = None) -> Any:
         """
         Load a PyTorch model from MLflow using a YAML configuration file.
 

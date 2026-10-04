@@ -1,9 +1,9 @@
-import os
+from pathlib import Path
 import sys
 
-sys.path.insert(0, os.path.abspath('../src'))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'graph-neural-network' / 'src'))
 
-project = 'Graph Recommendation System'
+project = 'GRACE'
 copyright = '2026, Matteo Massari'
 author = 'Matteo Massari'
 release = '0.1.0'
@@ -19,11 +19,10 @@ extensions = [
     "sphinxcontrib.mermaid",
 ]
 
-templates_path = ['_templates']
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = ['_build', 'it', 'Thumbs.db', '.DS_Store']
 
 html_theme = 'sphinx_rtd_theme'
-html_title = 'Graph Recommendation System'
+html_title = 'GRACE'
 
 html_theme_options = {
     'collapse_navigation': False,
@@ -46,3 +45,13 @@ todo_include_todos = True
 autodoc_typehints = 'signature'
 typehints_use_signature = True
 typehints_document_rtype = True
+
+# Render dollar-delimited math also used by existing docstrings.
+myst_enable_extensions = ["dollarmath"]
+
+# Let diagrams use their natural height instead of a fixed, mostly empty canvas.
+mermaid_height = "auto"
+
+language = 'en'
+templates_path = [str(Path(__file__).resolve().parent / '_templates')]
+html_context = {'other_language_prefix': 'it/'}

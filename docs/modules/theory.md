@@ -1,27 +1,23 @@
-# Teoria
+# Theory
 
-In questa sezione affrontiamo la teoria dietro ciò che ha reso possibile questo progetto. Partendo dall'informazione su una struttura a grafo arriviamo alla generazione di una nuova informazione.
+In this section we address the theory behind what made this project possible. Starting from the information on a graph structure we reach the generation of a new information.
 
 ## Introduction to Knowledge Graphs
 
-I **Knowledge Graphs (KG)** sono reti semantiche che rappresentano relazioni tra entità.  
-Dal punto di vista strutturale, si basano sui **grafi**, una struttura matematica discreta che, attraverso nodi e archi, consente di modellare oggetti e relazioni del mondo reale.
+**Knowledge Graphs (KG)** are semantic networks that represent relationships between entities.
+From the structural point of view, they are based on **graphs**, a discrete mathematical structure that, through nodes and edges, allows to model objects and relationships of the real world.
 
-Queste strutture permettono di rappresentare informazioni che possono apparire inizialmente disconnesse, formando reti articolate di interazioni e dipendenze semantiche.
+These structures allow to represent information that may initially appear disconnected, forming articulated networks of interactions and semantic dependencies.
 
-I Knowledge Graph possono essere memorizzati in **Graph Database** come **Neo4j** oppure interrogati tramite standard come **RDF** e **SPARQL**, che consentono di rappresentare e interrogare dati relazionali in forma semantica.
+Knowledge Graph can be stored in **Graph Database** as **Neo4j** or questioned by standard as **RDF** and **SPARQL**, which allow to represent and interrogate relational data in semantic form.
 
-Una definizione di Knowledge Graph è la seguente:
+A definition of Knowledge Graph is as follows:
 
 > *"A graph of data intended to accumulate and convey knowledge of the real world, whose nodes represent entities of interest and whose edges represent relations between these entities."*
 
-Ovvero:
-
-> *Un grafo di dati progettato per accumulare e trasmettere conoscenza del mondo reale, i cui nodi rappresentano entità di interesse e i cui archi rappresentano le relazioni tra queste entità.*
-
 ## Types of Knowledge Graphs
 
-I Knowledge Graph possono essere modellati secondo diversi paradigmi, a seconda del tipo di dato e del formalismo scelto. Tra i modelli principali troviamo:
+Knowledge Graphs can be shaped according to different paradigms, depending on the type of data and formalism chosen. Among the main models are:
 
 - Directed Edge-Labelled Graph
 - Heterogeneous Graph
@@ -29,85 +25,85 @@ I Knowledge Graph possono essere modellati secondo diversi paradigmi, a seconda 
 
 ### Directed Edge-Labelled Graph
 
-I **Directed Edge-Labelled Graph** sono grafi in cui:
+**Directed Edge-Labelled Graphs** are graphs in which:
 
-- i **nodi** rappresentano oggetti, entità o concetti;
-- gli **archi** collegano i nodi e sono caratterizzati da:
-  - una **direzione**, che indica il verso della relazione;
-  - un’**etichetta**, che descrive il tipo di relazione tra i due nodi.
+- **Nodes** represent objects, entities or concepts;
+- **Edges** connect the nodes and are characterized by:
+  - a **direction**, indicating the orientation of the relationship;
+  - a **label**, describing the type of relationship between the two nodes.
 
-Dal punto di vista matematico, un directed edge-labelled graph può essere visto come un grafo diretto tradizionale:
+From the mathematical point of view, a directed edge-labelled graph can be seen as a traditional direct graph:
 
 ```{math}
 G = (U, L)
 ```
 
-dove:
+where:
 
-- {math}`U` è l’insieme dei nodi;
-- {math}`L` è l’insieme degli archi diretti.
+- {math}`U` is the set of nodes;
+- {math}`L` is the set of direct edges.
 
-A questa struttura si aggiunge un’etichetta per ogni arco {math}`\left(u_i, u_j\right) \in L`, ottenendo un insieme esteso di archi:
+This structure adds a label for each edge {math}`\left(u_i, u_j\right) \in L`, obtaining an extended set of edges:
 
 ```{math}
 L^* = \left\{(u_i, u_j, a_{ij}) \mid (u_i, u_j) \in L \right\}
 ```
 
-Nell’ambito della rappresentazione della conoscenza, questo tipo di grafo è fondamentale perché costituisce la base del **Resource Description Framework (RDF)**.
+As part of the representation of knowledge, this type of graph is fundamental because it is the basis of the **Resource Description Framework (RDF)**.
 
-Il **Resource Description Framework** è un modello standard per la codifica dei dati nel Web semantico.  
-La sua struttura facilita l’integrazione di dati provenienti da schemi diversi e supporta l’evoluzione dello schema nel tempo senza richiedere modifiche strutturali invasive.
+The **Resource Description Framework** is a standard model for data coding in the semantic Web.
+Its structure facilitates the integration of data from different patterns and supports the evolution of the scheme over time without requiring invasive structural changes.
 
-In RDF, l’informazione è rappresentata tramite **triplette** nella forma:
+In RDF, the information is represented through **triples** in the form:
 
 ```{math}
 (s, p, o)
 ```
 
-dove:
+where:
 
-- $s$ = soggetto, cioè l’entità di partenza;
-- $p$ = predicato, cioè la relazione;
-- $o$ = oggetto, cioè l’entità di arrivo oppure il valore associato.
+- $s$ = subject, i.e. the starting entity;
+- $p$ = predicate, that is, the relationship;
+- $o$ = object, i.e. the target entity or the associated value.
 
 ```{figure} ../images/Directed-edge-labelled-graph.png
 :alt: Directed edge-labelled graph
 :width: 70%
 :align: center
 
-Esempio di directed edge-labelled graph.
+Example of a directed edge-labelled graph.
 ```
 
-In altre parole, una tripletta RDF può essere interpretata come un arco orientato ed etichettato:
+In other words, a RDF triplet can be interpreted as a directed, labeled edge:
 
 ```{math}
-\text{soggetto} \xrightarrow{\text{predicato}} \text{oggetto}
+\text{subject} \xrightarrow{\text{predicate}} \text{object}
 ```
 
-Per questo motivo, un **RDF store** può essere visto come una collezione di relazioni espresse sotto forma di grafo diretto etichettato.
+For this reason, a **RDF store** can be seen as a collection of reports expressed in the form of direct labeled graph.
 
-Il linguaggio standard utilizzato per interrogare un RDF triple store è **SPARQL**, che consente di definire pattern di ricerca sulle triplette RDF e recuperare informazioni sulla base delle relazioni presenti nel grafo.
+The standard language used to question a RDF triple store is **SPARQL**, which allows you to define search patterns on RDF triplets and retrieve information on the basis of the reports present in the graph.
 
 ### Property Graph
 
-I **Property Graph** sono anch’essi composti da nodi e archi, ma con una differenza fondamentale: sia i nodi sia gli archi possono possedere **proprietà**, espresse come coppie chiave-valore.
+**Property Graphs** are also composed of nodes and edges, but with a fundamental difference: both nodes and edges can possess **property**, expressed as key-value pairs.
 
-Ogni nodo possiede:
+Each node has:
 
-- un identificatore univoco;
-- un insieme di archi uscenti;
-- un insieme di archi entranti;
-- una collezione di proprietà.
+- a unique identifier;
+- a set of outgoing edges;
+- a set of incoming edges;
+- a collection of property.
 
-Ogni arco possiede:
+Each edge has:
 
-- un identificatore univoco;
-- un nodo sorgente;
-- un nodo destinazione;
-- una label testuale che descrive la relazione;
-- una collezione di proprietà.
+- a unique identifier;
+- a node source;
+- a node destination;
+- a text label describing the relationship;
+- a collection of property.
 
-Esempio:
+Example:
 
 ```text
 (1: {name: "Alice", age: 32}) -[:knows {type: "friend"}]-> (2: {name: "Bob", age: 35})
@@ -118,60 +114,60 @@ Esempio:
 :width: 70%
 :align: center
 
-Esempio di property graph.
+Example of a property graph.
 ```
 
-Uno dei database più noti che implementa questo paradigma è **Neo4j**, sviluppato in Java.  
-Neo4j consente di memorizzare nodi e relazioni etichettati, arricchiti con proprietà, ed è progettato per rendere naturale l’attraversamento del grafo.
+One of the best known databases that implement this paradigm is **Neo4j**, developed in Java.
+Neo4j allows you to store nodes and labeled relationships, enriched with properties, and is designed to make the graph crossing natural.
 
-Il linguaggio di query tipicamente utilizzato in questo contesto è **Cypher**.
+The query language typically used in this context is **Cypher**.
 
 ## Knowledge Representation and Reasoning
 
-Il **Knowledge Representation and Reasoning (KRR)** è una branca dell’intelligenza artificiale che si occupa di rappresentare la conoscenza in modo strutturato, così da permettere ai sistemi informatici di prendere decisioni ed effettuare inferenze.
+The **Knowledge Representation and Reasoning (KRR)** is a branch of artificial intelligence that is responsible for representing knowledge in a structured way, so as to allow computer systems to make decisions and make inferences.
 
-I Knowledge Graph sono particolarmente adatti a questo scopo perché rappresentano concetti, entità e relazioni del mondo reale in maniera chiara, strutturata e interpretabile.
+Knowledge Graphs are particularly suitable for this purpose because they represent concepts, entities and real world relations in a clear, structured and interpretable manner.
 
 ### Knowledge Representation
 
-Nella costruzione di una rappresentazione della conoscenza si parte da alcune **assunzioni** fondamentali:
+In the construction of a representation of knowledge it starts from some fundamental **assumptions**:
 
-- **Closed World Assumption (CWA)**: il grafo è considerato completo; ciò che non è presente viene considerato falso.
-- **Open World Assumption (OWA)**: il grafo può essere incompleto; ciò che non è presente non è necessariamente falso.
+- **Closed World Assumption (CWA)**: the graph is considered complete; what is not present is considered false.
+- **Open World Assumption (OWA)**: the graph may be incomplete; what is not present is not necessarily false.
 
-Un concetto centrale è quello di **ontologia**, ovvero una rappresentazione formale e condivisa della conoscenza di un dominio.
+A central concept is that of **ontology**, i.e. a formal and shared representation of knowledge of a domain.
 
-Le sue componenti principali sono:
+Its main components are:
 
-- individui;
-- proprietà;
-- classi;
-- assiomi e restrizioni.
+- individuals;
+- property;
+- classes;
+- axioms and restrictions.
 
 ### Knowledge Reasoning
 
-Il ragionamento sulla conoscenza può avvenire principalmente in due forme:
+The reasoning on knowledge can take place mainly in two forms:
 
-- **deduzione**: si parte da regole generali per derivare casi particolari;
-- **induzione**: si parte da osservazioni particolari per formulare generalizzazioni.
+- **deduction**: start from general rules to derive particular cases;
+- **induction**: it starts from special observations to formulate generalizations.
 
-Esempio di deduzione:
+Example of deduction:
 
-> Tutti gli uomini sono mortali.  
-> Socrate è un uomo.  
-> Quindi Socrate è mortale.
+> All men are mortal.
+> Socrates is a man.
+> So Socrates is mortal.
 
-Esempio di induzione:
+Example of induction:
 
-> Ho osservato molti cigni bianchi.  
-> Posso ipotizzare che i cigni siano bianchi.
+> I have observed many white swans.
+> I can assume the swans are white.
 
-Nel contesto dei Knowledge Graph:
+In the context of Knowledge Graph:
 
-- **Deductive Knowledge**: consiste nel derivare nuove verità da ciò che è già noto, tramite regole di inferenza.
-- **Inductive Knowledge**: consiste nel derivare nuove verità a partire da pattern osservati nei dati, tipicamente tramite approcci di machine learning.
+- **Deductive Knowledge**: is to derive new truths from what is already known, through rules of inference.
+- **Inductive Knowledge**: it is to derive new truths from patterns observed in data, typically through machine learning approaches.
 
-Questi due approcci non si escludono: il grafo rimane lo stesso, ma cambiano le tecniche usate per sfruttarlo.
+These two approaches are not excluded: the graph remains the same, but the techniques used to exploit it change.
 
 ```{figure} ../images/ded_ind.jpg
 :alt: Deductive and inductive knowledge
@@ -179,144 +175,144 @@ Questi due approcci non si escludono: il grafo rimane lo stesso, ma cambiano le 
 :align: center
 
 
-Differenza tra conoscenza deduttiva e induttiva.
+Difference between deductive and inductive knowledge.
 ```
 
 #### Deductive Knowledge
 
-La conoscenza deduttiva riguarda fatti non esplicitamente memorizzati nel grafo ma derivabili logicamente a partire dall’ontologia o da regole formali.
+Deductive knowledge concerns facts not explicitly stored in the graph but derived logically from ontology or formal rules.
 
-Nel ragionamento su ontologie complete emerge spesso un problema di **indecidibilità**: non esiste un algoritmo che, per qualsiasi ontologia in input, garantisca sempre una risposta corretta in tempo finito.  
-Per questo motivo, nella pratica si adottano formalismi che bilanciano **espressività** e **complessità computazionale**.
+In the reasoning on complete ontologies often emerges a problem of **undecidability**: there is no algorithm that, for any ontology in input, always ensures a correct answer in finite time.
+For this reason, formalities are adopted in practice that balance **expressive** and **computational complexity**.
 
-Le principali strategie per il ragionamento deduttivo sono:
+The main strategies for deductive reasoning are:
 
 - **Rules**
 - **Description Logics (DL)**
 
 ##### Rules
 
-Le regole hanno tipicamente la forma:
+The rules typically have the form:
 
-> SE [condizione] ALLORA [conclusione]
+> [condition] [conclusion]
 
-Permettono di dedurre nuova conoscenza applicando regole logiche predefinite, come:
+They allow to deduce new knowledge by applying predefined logic rules, such as:
 
-- simmetria: se A conosce B, allora B conosce A;
-- transitività: se A è parte di B e B è parte di C, allora A è parte di C.
+- symmetry: if A knows B, then B knows A;
+- If A is part of B and B is part of C, then A is part of C.
 
 ##### Description Logics
 
-Le **Description Logics** sono formalismi per rappresentare la conoscenza tramite:
+The **Description Logics** are formalisms to represent knowledge through:
 
-- **individui**: oggetti del mondo;
-- **classi** o **concetti**: insiemi di individui;
-- **proprietà** o **ruoli**: relazioni tra individui.
+- **individuals**: objects of the world;
+- **classes** or **concepts**: sets of individuals;
+- **properties** or **roles**: relationships between individuals.
 
-Una knowledge base in Description Logic è generalmente composta da:
+A knowledge base in Description Logic is generally composed of:
 
-- **TBox (Terminological Box)**: contiene la conoscenza generale, cioè assiomi, gerarchie e relazioni tra concetti;
-- **ABox (Assertional Box)**: contiene i fatti specifici sugli individui;
-- **RBox (Role Box)**: contiene assiomi sui ruoli o sulle proprietà.
+- **TBox (Terminological Box)**: contains general knowledge, i.e. axioms, hierarchy and relationships between concepts;
+- **ABox (Assertional Box)**: contains specific facts about individuals;
+- **RBox (Role Box)**: contains axioms on roles or properties.
 
-Questa separazione è utile sia dal punto di vista computazionale sia per il riuso della conoscenza.
+This separation is useful both from the computational point of view and for the reuse of knowledge.
 
-Il compromesso principale nelle Description Logics consiste nel limitare alcuni costrutti per mantenere decidibile il ragionamento.
+The main compromise in Description Logics is to limit some constructs to keep reasoning decidable.
 
-In generale:
+In general:
 
-- in contesti **CWA** si tende a preferire approcci basati su **regole**;
-- in contesti **OWA** si tende a preferire approcci basati su **Description Logics**.
+- in contexts **CWA** you tend to prefer approaches based on **rules**;
+- in contexts **OWA** you tend to prefer approaches based on **Description Logics**.
 
-In sostanza:
+Basically:
 
-- le **regole** trasformano fatti esistenti in nuovi fatti;
-- le **DL** consentono un ragionamento più strutturato sull’intera base di conoscenza.
+- **Rules** transform existing facts into new facts;
+- **Description Logics** allow a more structured reasoning on the whole knowledge base.
 
 #### Inductive Knowledge
 
-A differenza della conoscenza deduttiva, la conoscenza induttiva parte da osservazioni concrete per generalizzare.  
-Questo la rende particolarmente adatta agli approcci di **machine learning**, supervisionato o self-supervised.
+Unlike deductive knowledge, inductive knowledge starts from concrete observations to generalize.
+This makes it particularly suitable for approaches **machine learning**, supervised or self-supervised.
 
-I principali approcci di conoscenza induttiva si distinguono in:
+The main approaches to inductive knowledge are:
 
 - **Numerical Learning**
 - **Symbolic Learning**
 
 ##### Numerical Learning
 
-Produce una rappresentazione numerica della conoscenza, trasformando entità e relazioni in vettori o embedding.
+Produces a numerical representation of knowledge, transforming entities and relationships into vectors or embedding.
 
-Tra i principali approcci troviamo:
+Among the main approaches we find:
 
-- **Graph Analytics**  
-  Analizza la topologia del grafo senza usare necessariamente etichette semantiche. Misure come centralità, clustering coefficient e PageRank descrivono il ruolo dei nodi nella rete.
+- **Graph Analytics**
+  Analyze the topology of the graph without necessarily using semantic labels. Measures such as centrality, clustering coefficient and PageRank describe the role of nodes in the network.
 
-- **Embedding Extraction**  
-  Estrae rappresentazioni numeriche dense del grafo.
+- **Embedding Extraction**
+  Excerpt dense numerical representations of the graph.
 
-In questo ambito rientrano:
+In this area they fall:
 
-- **Knowledge Graph Embeddings (KGE)**, tipicamente self-supervised;
-- **Graph Neural Networks (GNN)**, tipicamente supervisionate o task-driven.
+- **Knowledge Graph Embeddings (KGE)**, typically self-supervised;
+- **Graph Neural Networks (GNN)**, typically supervised or task-driven.
 
-La differenza principale è che:
+The main difference is that:
 
-- i **KGE** modellano esplicitamente triplette e relazioni;
-- le **GNN** modellano la struttura del grafo e la propagazione dell’informazione tra nodi.
+- **KGE** explicitly model triplets and relationships;
+- **GNNs** model the structure of the graph and the propagation of information between nodes.
 
-Entrambi producono **embedding** utilizzabili poi in task downstream come:
+Both produce **embedding** can then be used in downstream task as:
 
-- classificazione di nodi;
-- regressione;
+- node classification;
+- regression;
 - link prediction;
 - graph classification;
 - recommendation.
 
 ##### Symbolic Learning
 
-Produce rappresentazioni simboliche e interpretabili della conoscenza, restando nel dominio logico-formale.
+It produces symbolic and interpretable representations of knowledge, remaining in the logical-formal domain.
 
-Tra gli approcci principali:
+Among the main approaches:
 
-- **Rule Mining**  
-  Estrae regole logiche a partire da pattern statistici osservati nel grafo.
+- **Rule Mining**
+  It extracts logical rules from statistical patterns observed in the graph.
 
-- **Axiom Mining**  
-  Estrae assiomi ontologici, come sussunzioni tra classi o vincoli di dominio e range, sulla base delle relazioni osservate.
+- **Axiom Mining**
+  Ontological axioms, such as assumptions between classes or domain and range constraints, based on observed relationships.
 
 ## Knowledge Graph Embedding
 
-I **Knowledge Graph Embeddings** apprendono rappresentazioni vettoriali di entità, relazioni e fatti a partire dalle triple esistenti, con l’obiettivo di catturare la plausibilità di una tripla {math}`(s, p, o)`.
-Le componenti principali di questi modelli sono:
+**Knowledge Graph Embeddings** learn vector representations of entities, relationships and facts from existing triples, with the aim of capturing the plausibility of a triple {math}`(s, p, o)`.
+The main components of these models are:
 
-1. **Representation Space**: lo spazio vettoriale in cui vengono rappresentate entità e relazioni;
-2. **Scoring Function**: la funzione che assegna uno score a una tripla;
-3. **Encoding Model**: il modo in cui entità e relazioni interagiscono nello spazio degli embedding;
-4. **Informazioni aggiuntive**: eventuali vincoli, attributi o segnali esterni.
+1. **Representation Space**: the vector space in which entities and relationships are represented;
+2. **Scoring Function**: the function that assigns a score to a triple;
+3. **Encoding Model**: how entities and relationships interact in embedding space;
+4. **Additional information**: constraints, attributes, or external signals.
 
-Il processo di addestramento segue tipicamente questi passaggi:
+The training process typically follows these steps:
 
-1. inizializzazione casuale dei vettori di entità e relazioni;
-2. selezione di batch di triplette reali;
-3. generazione di triplette negative alterando entità o relazioni;
-4. ottimizzazione della scoring function fino alla convergenza.
+1. random initialization of vectors of entities and relationships;
+2. selection of batches of real triples;
+3. generation of negative triplets altering entities or relationships;
+4. Scoring function optimization up to convergence.
 
-Modelli come **TransE**, **RotatE** e **ComplEx** ottimizzano una funzione che assegna punteggi alti alle triplette vere e punteggi bassi a quelle false.
+Models like **TransE**, **RotatE** and **ComplEx** optimize a function that assigns high scores to true triplets and low scores to false ones.
 
 ## Graph Neural Networks
 
-A differenza dei KG Embeddings, che producono rappresentazioni statiche, le **Graph Neural Networks (GNN)** producono embedding **contestuali** e **task-specific**.
+Unlike KG Embeddings, which produce static representations, the **Graph Neural Networks (GNN)** produce **contextual** embeddings and **task-specific**.
 
-La rappresentazione di un nodo viene costruita aggregando iterativamente le informazioni dei suoi vicini, e l’intero processo viene ottimizzato rispetto al task finale.
+The representation of a node is built by aggregating the information of its neighbors, and the whole process is optimized compared to the final task.
 
-Una GNN può essere vista come una trasformazione neurale che opera su:
+A GNN can be seen as a neural transformation that works on:
 
-- attributi dei nodi;
-- attributi degli archi;
-- eventuale contesto globale;
+- attributes of nodes;
+- attributes of the edges;
+- optional global context;
 
-preservando le simmetrie strutturali del grafo, come l’invarianza rispetto alla permutazione dei nodi.
+preserving the structural symmetries of the graph, such as invariance with the permutation of nodes.
 
 ### Architecture
 
@@ -325,69 +321,69 @@ preservando le simmetrie strutturali del grafo, come l’invarianza rispetto all
 :width: 75%
 :align: center
 
-Schema generale di una Graph Neural Network.
+General structure of a Graph Neural Network.
 ```
 
 #### Input
 
-Una Graph Neural Network prende in input:
+A Graph Neural Network takes input:
 
-- le feature iniziali dei nodi;
-- la struttura del grafo;
-- eventualmente feature sugli archi;
-- eventualmente informazioni globali sul grafo.
+- the initial features of the nodes;
+- the structure of the graph;
+- possibly feature on the edges;
+- possibly global information on the graph.
 
-Per rappresentare il grafo, invece di usare matrici dense, si utilizzano spesso strutture sparse come liste di adiacenza.  
-Questo consente di evitare computazioni inutili sulle parti disconnesse del grafo.
+To represent the graph, instead of using dense matrices, you often use structures scattered as lists of adjacency.
+This prevents unnecessary computations on the disconnected parts of the graph.
 
-Formalmente possiamo considerare:
+Formally, we can consider:
 
-- **nodi** {math}`V`;
-- **archi** {math}`E`;
-- **contesto globale** {math}`U`.
+- **nodes** {math}`V`;
+- **edges** {math}`E`;
+- **global context** {math}`U`.
 
 #### GNN Block
 
-In una GNN semplice:
+In a simple GNN:
 
-- ogni nodo passa attraverso un modulo neurale dedicato;
-- ogni arco passa attraverso un modulo dedicato;
-- il contesto globale può essere anch’esso aggiornato.
+- each node passes through a dedicated neural module;
+- each edge passes through a dedicated module;
+- the global context can also be updated.
 
-Il risultato è un nuovo grafo con la stessa struttura ma con embedding aggiornati.
+The result is a new graph with the same structure but with updated embedding.
 
 #### Message Passing
 
-Il **message passing** è il meccanismo centrale delle GNN: consente ai nodi di comunicare tra loro tramite la struttura del grafo.
+The **message passing** is the central mechanism of the GNN: it allows the nodes to communicate with each other through the structure of the graph.
 
-Il processo si articola in tre fasi:
+The process is divided into three stages:
 
-1. creazione del messaggio;
-2. aggregazione dei messaggi ricevuti;
-3. aggiornamento della rappresentazione del nodo.
+1. creating the message;
+2. aggregation of received messages;
+3. update of the node representation.
 
 ```{figure} ../images/graph_message_passing.svg
 :alt: Graph message passing
 :width: 80%
 :align: center
 
-Schema del processo di message passing.
+Structure of the message-passing process.
 ```
 
-Le tre funzioni principali sono:
+The three main functions are:
 
-1. **Message Function**: costruisce i messaggi da inviare ai vicini;
-2. **Aggregation Function**: combina i messaggi provenienti dai vicini;
-3. **Update Function**: aggiorna la rappresentazione del nodo.
+1. **Message Function**: builds messages to send to the neighbors;
+2. **Aggregation Function**: combines messages from neighbors;
+3. **Update Function**: updates the representation of the node.
 
-Le aggregazioni più comuni includono:
+Common aggregations include:
 
-- somma;
-- media;
-- massimo;
-- attenzione.
+- sum;
+- mean;
+- maximum;
+- attention.
 
-Una formulazione generale dell’aggiornamento è:
+A general formulation of the update is:
 
 ```{math}
 h_v^{(k+1)} = f\left(
@@ -396,193 +392,193 @@ h_v^{(k)},
 \right)
 ```
 
-dove:
+where:
 
-- {math}`h_v^{(k)}` è la rappresentazione del nodo $$v$$ al layer $$k$$;
-- {math}`mathcal{N}(v)` è l’insieme dei vicini di $$v$$;
-- {math}`mathrm{Agg}` è la funzione di aggregazione;
-- {math}`f` è la funzione di aggiornamento.
+- {math}`h_v^{(k)}` is the representation of node {math}`v` at layer {math}`k`;
+- {math}`\mathcal{N}(v)` is the set of neighbors of {math}`v`;
+- {math}`\mathrm{Agg}` is the aggregation function;
+- {math}`f` is the update function.
 
-In questo senso, la nuova rappresentazione del nodo è proprio il vettore {math}`h_v^{(k+1)}`.
+In this sense, the new representation of the node is precisely the vector {math}`h_v^{(k+1)}`.
 
 ### Prediction Tasks for GNNs
 
-Le GNN possono essere utilizzate per diversi task:
+GNN can be used for several tasks:
 
-- **Graph-level task**: previsione di proprietà dell’intero grafo;
-- **Node-level task**: previsione di etichette o ruoli dei nodi;
-- **Edge-level task**: previsione su coppie di nodi o archi.
+- **Graph-level task**: prediction of ownership of the entire graph;
+- **Node-level task**: prediction of labels or roles of nodes;
+- **Edge-level task**: prediction on pairs of nodes or edges.
 
-Per passare da rappresentazioni locali a una rappresentazione aggregata si utilizzano spesso operatori di **pooling**.
+To switch from local representations to an aggregate representation, operators often use **pooling**.
 
-Il pooling segue tipicamente due fasi:
+The pooling typically follows two phases:
 
-1. raccolta degli embedding in una matrice;
-2. aggregazione tramite una riduzione verso un embedding unico.
+1. collection of embeddings in a matrix;
+2. aggregation through a reduction to a single embedding.
 
-Possiamo quindi fare previsioni su:
+We can therefore make forecasts on:
 
-- nodo: MLP su embedding di nodo;
-- arco: combinazione degli embedding dei due nodi incidenti;
-- grafo: pooling globale seguito da classificatore.
+- Node: MLP on node embedding;
+- arc: combination of embedding of the two nodes accidents;
+- graph: global pooling followed by ranking.
 
 ### Graph Neural Networks vs Knowledge Graph Embeddings
 
 | Knowledge Graph Embeddings | Graph Neural Networks |
 |---|---|
-| embedding statici | embedding contestuali |
-| rappresentazioni globali | rappresentazioni costruite localmente tramite vicinato |
-| meno dipendenti dal task finale | ottimizzate direttamente per il task |
-| focus su triple e relazioni | focus sulla struttura locale e globale del grafo |
+| static embeddings | contextual embeddings |
+| global representations | representations built locally via neighborhood |
+| less dependent on the final task | directly optimized for the task |
+| focus on triples and relationships | focus on local and global graph structure |
 
 ## Enrichment of a Graph Database
 
-Il **knowledge graph enrichment** è il processo di espansione e miglioramento di un grafo preesistente tramite:
+The **knowledge graph enrichment** is the process of expanding and improving a pre-existing graph through:
 
-- aggiunta di nuovi dati;
-- raffinamento delle connessioni;
-- miglioramento della struttura.
+- addition of new data;
+- refinement of connections;
+- improvement of the structure.
 
-Questo processo può partire da:
+This process can start from:
 
-- **testi**
-- **dati strutturati**
+- **text**
+- **structured data**
 
 ### Enrichment from Text
 
-Nel caso di testi, una pipeline tipica comprende:
+In the case of texts, a typical pipeline includes:
 
-1. **Pre-processing**  
-   tokenizzazione, part-of-speech tagging, dependency parsing, word sense disambiguation;
-2. **NER (Named Entity Recognition)**  
-   identificazione delle entità nominate;
-3. **Entity Linking**  
-   collegamento delle entità a nodi esistenti nel grafo;
-4. **Relation Extraction**  
-   estrazione di nuove relazioni tra entità.
+1. **Pre-processing**
+   tokenization, part-of-speech tagging, dependency parsing, word sense disambiguation;
+2. **NER (Named Entity Recognition)**
+   identification of appointed entities;
+3. **Entity Linking**
+   connection of existing nodes in the graph;
+4. **Relation Extraction**
+   extraction of new relationships between entities.
 
 ### Enrichment from Structured Data
 
-Nel caso di dati tabellari o strutturati:
+In the case of table or structured data:
 
-- **Direct Mapping**  
-  il sistema genera automaticamente un grafo dalla tabella;
-- **Custom Mapping**  
-  si definiscono regole personalizzate, ad esempio con linguaggi come **R2RML**, per trasformare righe e colonne in nodi e archi coerenti con un grafo esistente.
+- **Direct Mapping**
+  the system automatically generates a graph from the table;
+- **Custom Mapping**
+  custom rules are defined, for example with languages as **R2RML**, to transform rows and columns into joint nodes and edges with an existing graph.
 
-L’allineamento può essere realizzato tramite query oppure tramite pipeline **ETL** e meccanismi di **CDC (Change Data Capture)**.
+Alignment can be achieved by query or pipeline **ETL** and mechanisms of **CDC (Change Data Capture)**.
 
 ## Enterprise Knowledge Graph
 
-La costruzione di Knowledge Graph aziendali abilita molte applicazioni concrete.  
-Tra le caratteristiche tipiche troviamo:
+The construction of Knowledge Graph company enables many concrete applications.
+Among the typical features are:
 
-- dati da fonti miste, interne ed esterne;
-- grandi dimensioni;
-- raffinamento continuo;
-- aggiornamento costante;
-- integrazione tra ontologie e machine learning;
-- uso frequente di ontologie leggere.
+- data from mixed, internal and external sources;
+- large dimensions;
+- continuous refinement;
+- constant update;
+- integration between ontologies and machine learning;
+- frequent use of lightweight ontologies.
 
-I Knowledge Graph rendono le relazioni **esplicite** e centrali nel modello dati.  
-Questo consente di navigare in modo naturale connessioni complesse, eterogenee e sparse.
+Knowledge Graph makes relationships **explicit** and central in the data model.
+This allows you to navigate in a natural way complex, heterogeneous and scattered connections.
 
-Tra i problemi più comuni affrontati in ambito aziendale troviamo:
+Among the most common problems faced in the company are:
 
-- classificazione dei nodi;
-- classificazione di grafi o sottografi;
+- node classification;
+- graph or subgraph classification;
 - clustering;
 - link prediction;
-- identificazione dei nodi più influenti.
+- identification of the most influential nodes.
 
-Le principali applicazioni aziendali includono:
+Main business applications include:
 
-- mappatura della conoscenza aziendale;
-- miglioramento delle capacità di ricerca;
+- mapping of business knowledge;
+- improvement of research skills;
 - recommendation system;
-- agenti conversazionali e sistemi GraphRAG;
-- tracciabilità di eventi e processi.
+- Conversational agents and GraphRAG systems;
+- traceability of events and processes.
 
 ## Agentic AI and Graph Databases
 
-Le principali applicazioni dei Graph Database in combinazione con sistemi intelligenti includono:
+The main applications of the Graph Database in combination with intelligent systems include:
 
 - **GraphRAG**
-- long-term memory relazionale
-- reasoning su strutture complesse
+- long-term relational memory
+- reasoning on complex structures
 
 ### Graph Retrieval-Augmented Generation
 
-Un limite frequente degli LLM nei task di retrieval riguarda la difficoltà a lavorare con dati strutturati, a comprendere relazioni gerarchiche e a mantenere coerenza in scenari multi-hop.
+A frequent limit of LLM in retrieval tasks concerns the difficulty of working with structured data, understanding hierarchical relationships and maintaining consistency in multi-hop scenarios.
 
-> **Multi-hop**: in una RAG tradizionale il modello deve collegare più frammenti di testo. Dopo alcuni passaggi, il contesto può degradarsi. Un grafo consente invece di esplicitare e conservare tali relazioni.
+> **Multi-hop**: In a traditional RAG the model must connect multiple text fragments. After a few steps, the context can degrade. A graph instead allows to express and preserve such relationships.
 
-Il **Graph Retrieval-Augmented Generation (GraphRAG)** incorpora dati strutturati a grafo, organizzando le informazioni in termini di:
+The **Graph Retrieval-Augmented Generation (GraphRAG)** incorporates structured graph data, organizing information in terms of:
 
-- entità;
-- relazioni;
-- attributi.
+- entity;
+- relations;
+- attributes.
 
-L’idea centrale è che il grafo esternalizza parte del ragionamento strutturale, riducendo il carico cognitivo sul modello linguistico.
+The central idea is that the graph outlines part of structural reasoning, reducing cognitive load on the linguistic model.
 
 ### GraphRAG Architecture
 
-Una pipeline GraphRAG può seguire questi passaggi:
+A GraphRAG pipeline can follow these steps:
 
-1. l’utente pone una domanda che implica conoscenza relazionale;
-2. il sistema estrae entità e relazioni dalla query;
-3. la richiesta viene tradotta in una query sul grafo, ad esempio in Cypher;
-4. un retriever estrae dati dal graph database tramite traversal, segnali semantici o modelli di embedding;
-5. un orchestratore raffina il contesto;
-6. il generatore produce la risposta finale.
+1. the user asks a question that implies relational knowledge;
+2. the system extracts entities and relationships from the query;
+3. the request is translated into a query on the graph, for example in Cypher;
+4. a retriever extracts data from the graph database through traversal, semantic signals or embedding models;
+5. an orchestrator refines the context;
+6. the generator produces the final answer.
 
 ## Graph Learning Recommendation Systems
 
-L’uso del **graph learning** nei recommendation system è naturale perché i dati di interazione sono intrinsecamente grafi:
+The use of **graph learning** in the recommendations system is natural because the interaction data are intrinsically graphs:
 
-- utenti che interagiscono con prodotti;
-- prodotti condivisi tra utenti;
-- relazioni multihop tra comportamenti e attributi.
+- users who interact with products;
+- products shared between users;
+- multihop relationships between behaviors and attributes.
 
-Questo rende molto naturale l’applicazione di tecniche di graph learning per:
+This makes graph learning techniques very natural for:
 
-- costruire sistemi di raccomandazione basati su ranking;
-- integrare side information;
-- modellare dipendenze multi-hop.
+- build ranking based recommendation systems;
+- integrate side information;
+- model multi-hop dependencies.
 
 | Classical Collaborative Filtering | Graph Learning on Graphs |
 |---|---|
-| lavora su matrici utente-item sparse | rappresenta direttamente le interazioni come grafo |
-| soffre di cold start | può mitigare il cold start con side information |
-| scala con difficoltà su relazioni complesse | modella naturalmente dipendenze multi-hop |
-| integrazione limitata di informazione extra | integra facilmente feature aggiuntive |
-| spesso orientato a score espliciti | naturalmente adatto a recommendation top-k |
+| works on scattered user-item matrices | directly represents interactions as a graph |
+| suffers from cold start | can mitigate cold start with side information |
+| scale with difficulty on complex relationships | naturally models multi-hop dependencies |
+| limited integration of extra information | easily integrates additional features |
+| often oriented toward explicit scores | naturally suited to top-k recommendations |
 
 ### Input
 
-I recommendation system su grafo lavorano generalmente con tre categorie di dati:
+Recommendation systems on graph generally work with three data categories:
 
-- **General interaction data**: interazioni utente-item non sequenziali;
-- **Sequential interaction data**: sequenze temporali di interazioni;
-- **Side information**: attributi utente, attributi item, social graph, ontologie, knowledge graph.
+- **General interaction data**: non sequential user-item interactions;
+- **Sequential interaction data**: temporal interaction sequences;
+- **Side information**: user attributes, item attributes, social graph, ontologies, knowledge graph.
 
 ### Information Propagation
 
-Il concetto chiave che migliora la qualità della raccomandazione è la **propagazione dell’informazione**.
+The key concept that improves the quality of the recommendation is **dissemination of information**.
 
-Esempio:
+Example:
 
-- l’utente A ha visto il film X;
-- il film X è stato visto anche dall’utente B;
-- l’utente B ha visto anche il film Y.
+- user A saw the movie X;
+- the movie X was also seen by user B;
+- user B also saw the film Y.
 
-Anche se l’utente A non ha visto Y, il grafo suggerisce una possibile relazione tra A e Y.  
-Questa capacità di catturare connessioni **multi-hop** è uno dei principali vantaggi del graph learning rispetto ai modelli classici.
+Although user A did not see Y, the graph suggests a possible relationship between A and Y.
+This ability to capture connections **multi-hop** is one of the main advantages of graph learning compared to classic models.
 
 ### Output
 
-Gli embedding finali dei nodi incorporano le informazioni propagate attraverso il grafo.  
-Questi embedding vengono poi passati a un modulo downstream che produce la raccomandazione finale.
+The end nodes embedding incorporates the information propagated through the graph.
+These embeddings are then passed to a downstream module that produces the final recommendation.
 
 ## Approaches to Graph Learning Recommendation Systems
 
@@ -591,28 +587,28 @@ Questi embedding vengono poi passati a un modulo downstream che produce la racco
 :width: 80%
 :align: center
 
-Panoramica dei principali approcci ai graph learning recommendation systems.
+Overview of the main approaches to graph learning recommendation systems.
 ```
 
 ### Random Walk Approaches
 
-Un sistema di raccomandazione basato su **random walk** utilizza un camminatore casuale che si muove nel grafo secondo una probabilità di transizione.
+A recommendation system based on **random walk** uses a random walker that moves in the graph according to a probability of transition.
 
-La probabilità di raggiungere un nodo dopo un certo numero di passi viene usata per costruire un ranking dei candidati.
+The probability of reaching a node after a number of steps is used to build a candidate ranking.
 
-Questi approcci sono efficaci nel catturare relazioni indirette e di ordine superiore, specialmente nei grafi eterogenei.  
-Una variante comune è il **random walk with restart**, in cui il camminatore può tornare periodicamente al nodo iniziale.
+These approaches are effective in capturing indirect and superior relationships, especially in heterogeneous graphs.
+A common variant is the **random walk with restart**, where the walker can periodically return to the initial node.
 
-Principali limiti:
+Main limits:
 
-- costo computazionale elevato;
-- natura euristica, con minore ottimizzabilità rispetto ai modelli neurali.
+- high computational cost;
+- heuristic nature, with less optimization than neural models.
 
 ### Graph Embedding-Based Recommendation Systems
 
-Questi approcci mappano i nodi del grafo in embedding a bassa dimensionalità che catturano la struttura e le relazioni tra entità.
+These approaches map graph nodes in low-dimensional embedding that capture structure and relationships between entities.
 
-A seconda del metodo usato, si distinguono tre grandi famiglie:
+Depending on the method used, there are three large families:
 
 - **Graph Factorization-based RS**
 - **Graph Distributed Representation-based RS**
@@ -620,21 +616,21 @@ A seconda del metodo usato, si distinguono tre grandi famiglie:
 
 #### Graph Factorization-Based RS
 
-Fattorizzano matrici di co-occorrenza o strutture derivate da meta-path per ottenere embedding di utenti e item.
+They provide co-occurrence matrices or structures derived from meta-path to obtain embedding of users and items.
 
 #### Graph Distributed Representation-Based RS
 
-Apprendono embedding tramite approcci tipo **Skip-gram** e sequenze generate via random walk.
+They learn embeddings through type approaches **Skip-gram** and sequences generated via random walk.
 
 #### Graph Neural Embedding-Based RS
 
-Utilizzano modelli neurali, come MLP o autoencoder, per apprendere rappresentazioni dense integrabili in sistemi di recommendation end-to-end.
+They use neural models, such as MLP or autoencoder, to learn dense representations that can be integrated in end-to-end recommendation systems.
 
 ### Graph Neural Network-Based Recommendation Systems
 
-Le **GNN-based recommendation systems** applicano direttamente Graph Neural Networks ai dati di interazione.
+The **GNN-based recommendation systems** directly apply Graph Neural Networks to interaction data.
 
-Le principali categorie sono:
+The main categories are:
 
 - **Graph Attention Network-based RS (GATRS)**
 - **Gated Graph Neural Network-based RS (GGNNRS)**
@@ -642,13 +638,13 @@ Le principali categorie sono:
 
 #### GAT-Based Recommendation Systems
 
-Usano meccanismi di attenzione per pesare in modo diverso l’influenza di nodi e relazioni vicine.
+They use mechanisms of attention to weigh differently the influence of nodes and close relationships.
 
 #### GGNN-Based Recommendation Systems
 
-Usano unità ricorrenti gated per modellare dinamiche e dipendenze complesse nei grafi sequenziali.
+They use gated recurring units to shape complex dynamics and dependencies in sequential graphs.
 
 #### GCN-Based Recommendation Systems
 
-Usano operazioni di convoluzione sul grafo per aggregare informazione strutturale e feature dei nodi, risultando molto efficaci nella recommendation.
+They use convolution on the graph to aggregate structural information and features of the nodes, resulting very effective in the recommendation.
 
